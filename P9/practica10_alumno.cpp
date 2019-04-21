@@ -66,9 +66,14 @@ Model RoadsFair;
 Model Kart;
 
 Skybox skybox;
+Skybox skybox2;
+Skybox skybox3;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
+
+int cont=0;
+float hora = 0.0;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -262,19 +267,34 @@ int main()
 		1.0f, 0.0f, 0.0f,
 		10.0f);
 	spotLightCount++;
-	
 
+	//skybox para dia
 	std::vector<std::string> skyboxFaces;
-	skyboxFaces.push_back("Textures/Skybox/hills_rt_noche1.tga");
-	skyboxFaces.push_back("Textures/Skybox/hills_lf_noche1.tga");
-	skyboxFaces.push_back("Textures/Skybox/hills_dn_noche1.tga");
-	skyboxFaces.push_back("Textures/Skybox/hills_up_noche1.tga");
-	skyboxFaces.push_back("Textures/Skybox/hills_bk_noche1.tga");
-	skyboxFaces.push_back("Textures/Skybox/hills_ft_noche1.tga");
-
-
+	skyboxFaces.push_back("Textures/Skybox/hills_rt.tga");
+	skyboxFaces.push_back("Textures/Skybox/hills_lf.tga");
+	skyboxFaces.push_back("Textures/Skybox/hills_dn.tga");
+	skyboxFaces.push_back("Textures/Skybox/hills_up.tga");
+	skyboxFaces.push_back("Textures/Skybox/hills_bk.tga");
+	skyboxFaces.push_back("Textures/Skybox/hills_ft.tga");
 	skybox = Skybox(skyboxFaces);
-
+	//skybox para amanecer o atardecer
+	std::vector<std::string> skyboxFaces2;
+	skyboxFaces2.push_back("Textures/Skybox/hills_rt_night.tga");
+	skyboxFaces2.push_back("Textures/Skybox/hills_lf_night.tga");
+	skyboxFaces2.push_back("Textures/Skybox/hills_dn_night.tga");
+	skyboxFaces2.push_back("Textures/Skybox/hills_up_night.tga");
+	skyboxFaces2.push_back("Textures/Skybox/hills_bk_night.tga");
+	skyboxFaces2.push_back("Textures/Skybox/hills_ft_night.tga");
+	skybox2 = Skybox(skyboxFaces2);
+	//skybox para noche
+	std::vector<std::string> skyboxFaces3;
+	skyboxFaces3.push_back("Textures/Skybox/hills_rt_noche1.tga");
+	skyboxFaces3.push_back("Textures/Skybox/hills_lf_noche1.tga");
+	skyboxFaces3.push_back("Textures/Skybox/hills_dn_noche1.tga");
+	skyboxFaces3.push_back("Textures/Skybox/hills_up_noche1.tga");
+	skyboxFaces3.push_back("Textures/Skybox/hills_bk_noche1.tga");
+	skyboxFaces3.push_back("Textures/Skybox/hills_ft_noche1.tga");
+	skybox3 = Skybox(skyboxFaces3);
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -293,13 +313,40 @@ int main()
 		//Recibir eventos del usuario
 		glfwPollEvents();
 
+		//contador para cambiar de hora cada cierto tiempo
+		//de esta forma cambiamos el skybox de acuerdo a la hora del dia.
+		while (cont != 500000000) {
+			cont += 1;
+		}
+		if (cont == 500000000) {
+			cont = 0;
+			hora += 0.1;//si se quiere aumentar o disminuir la velocidad del cambio de hora, se modifica esta variable
+			if (hora >= 24.0) {//reinicia el contador al cumplir las 24 horas
+				hora = 0.0;
+			}
+		}
+
 		camera.keyControl(mainWindow.getsKeys(), deltaTime);
 		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+		
+		//Cambia skybox de acuerdo a la hora del dia
+		//dia
+		if (hora >= 0.0 && hora <= 8.0) {
+			skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+		//amanecer o atardecer
+		else if((hora > 8.0 && hora <= 10.0)|| (hora > 21.0 && hora <= 24.0)){
+			skybox2.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+		//noche
+		else if (hora > 10.0 && hora <= 21.0) {
+			skybox3.DrawSkybox(camera.calculateViewMatrix(), projection);
+		}
+
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
