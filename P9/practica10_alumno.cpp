@@ -19,7 +19,7 @@
 #include "Shader_light.h"
 #include "Camera.h"
 #include "Texture.h"
-//para iluminaci�n
+//para iluminación
 #include "CommonValues.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
@@ -63,6 +63,7 @@ Model wall;
 Model tree;
 Model stone;
 Model RoadsFair;
+Model Bath;
 Model Kart;
 
 Skybox skybox;
@@ -80,7 +81,7 @@ static const char* vShader = "shaders/shader_light.vert";
 
 // Fragment Shader
 static const char* fShader = "shaders/shader_light.frag";
-//c�lculo del promedio de las normales para sombreado de Phong
+//cálculo del promedio de las normales para sombreado de Phong
 void calcAverageNormals(unsigned int * indices, unsigned int indiceCount, GLfloat * vertices, unsigned int verticeCount, 
 						unsigned int vLength, unsigned int normalOffset)
 {
@@ -217,12 +218,14 @@ int main()
 	//LUMINARIA
 	street_Lamp = Model();
 	street_Lamp.LoadModel("Models/StreetLamp.obj");
-	tree = Model();
-	tree.LoadModel("Models/Tree2.obj");
 	RoadsFair = Model();
 	RoadsFair.LoadModel("Models/RoadsFair.obj");
 	stone = Model();
 	stone.LoadModel("Models/CobbleStones2.obj");
+
+	//Vegetacion
+	tree = Model();
+	tree.LoadModel("Models/tree4a_lod1.obj");
 
 	//Carretaera
 	road = Model();
@@ -234,15 +237,18 @@ int main()
 	Kart = Model();
 	Kart.LoadModel("Models/kart.obj");
 
+	//Bath
+	Bath = Model();
+	Bath.LoadModel("Models/bathroom.obj");
 
 
-	//luz direccional, s�lo 1 y siempre debe de existir
+	//luz direccional, sólo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f, 
 								0.3f, 0.3f,
 								0.0f, 0.0f, -1.0f);
 //contador de luces puntuales
 	unsigned int pointLightCount = 0;
-	//Declaraci�n de primer luz puntual
+	//Declaración de primer luz puntual
 	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,
 								0.0f, 1.0f,
 								2.0f, 1.5f,1.5f,
@@ -320,7 +326,7 @@ int main()
 		}
 		if (cont == 500000000) {
 			cont = 0;
-			hora += 0.1;//si se quiere aumentar o disminuir la velocidad del cambio de hora, se modifica esta variable
+			hora += 0.008;//si se quiere aumentar o disminuir la velocidad del cambio de hora, se modifica esta variable
 			if (hora >= 24.0) {//reinicia el contador al cumplir las 24 horas
 				hora = 0.0;
 			}
@@ -430,6 +436,141 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(6.6f, -2.0f, -1.5f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(9.6f, -2.0f, -1.5f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(12.6f, -2.0f, -1.5f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+
+			//Pared lateral izquierda
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -3.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -6.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -9.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -12.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -15.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -18.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -21.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.8f, -2.0f, -24.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+
+			//Pared lateral derecha
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -3.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -6.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -9.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -12.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -15.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -18.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -21.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(14.2f, -2.0f, -24.0f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			wall.RenderModel();
+
 
 			//path
 			model = glm::mat4(1.0);
@@ -468,6 +609,60 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, -2.05f, -13.5f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, -2.05f, -16.2f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, -2.05f, -18.9f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(0.0f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(2.7f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(5.4f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(8.1f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(10.8f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(13.1f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.2f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
 
 			//pista gokarts	
 			model = glm::mat4(1.0);
@@ -484,24 +679,18 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			Kart.RenderModel();
-			
-			/*
-			//lUMINARIA
+
+
+			//baño Cambiar escala y posicion 
 			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(-28.0f, -8.0f, 9.0f));
-			model = glm::scale(model, glm::vec3(5.0f, 4.0f, 4.0f));
+			model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));
+			model = glm::scale(model, glm::vec3(0.006f, 0.006f, 0.006f));
+			model = glm::rotate(model, 180* toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			street_Lamp.RenderModel();
+			Bath.RenderModel();
 
-			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(45.0f, -8.0f, 9.0f));
-			model = glm::scale(model, glm::vec3(5.0f, 4.0f, 4.0f));
-			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			street_Lamp.RenderModel();
-
-			*/
+		
 
 			glUseProgram(0);
 
