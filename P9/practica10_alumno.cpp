@@ -65,6 +65,7 @@ Model stone;
 Model RoadsFair;
 Model Bath;
 Model Kart;
+Model Noria;
 
 Skybox skybox;
 Skybox skybox2;
@@ -237,6 +238,10 @@ int main()
 	Kart = Model();
 	Kart.LoadModel("Models/kart.obj");
 
+	//noria
+	Noria = Model();
+	Noria.LoadModel("Models/noria.obj");
+
 	//Bath
 	Bath = Model();
 	Bath.LoadModel("Models/bathroom.obj");
@@ -399,9 +404,13 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
 
-
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(0.0f, -2.0f, -3.0f));
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Noria.RenderModel();
 		
-
 		//Entrada a la feria
 			//pared izquierda
 			model = glm::mat4(1.0);
