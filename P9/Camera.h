@@ -13,8 +13,15 @@ public:
 	Camera();
 	Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed);
 
+	//Funciones para el control de camara en primera persona
+
 	void keyControl(bool* keys, GLfloat deltaTime);
 	void mouseControl(GLfloat xChange, GLfloat yChange);
+
+	//Funciones para el control de la camara aerea
+
+	void keyControlAerea(bool* keys, GLfloat deltaTime);
+	void mouseControlAerea(GLfloat xChange, GLfloat yChange);
 
 	glm::vec3 getCameraPosition();
 	glm::vec3 getCameraDirection();
@@ -28,6 +35,7 @@ private:
 	glm::vec3 up;
 	glm::vec3 right;
 	glm::vec3 worldUp;
+
 
 	GLfloat yaw;
 	GLfloat pitch;

@@ -1,5 +1,10 @@
 #include "Camera.h"
 
+extern GLfloat posX = 0, posY = 0, posZ = 0;
+extern GLfloat frontX = 0, frontY = 0, frontZ = 0;
+extern GLfloat upX = 0, upY = 0, upZ = 0;
+
+
 Camera::Camera() {}
 
 Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch, GLfloat startMoveSpeed, GLfloat startTurnSpeed)
@@ -62,9 +67,88 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 	update();
 }
 
+
+
+//Camara aerea
+void Camera::keyControlAerea(bool* keys, GLfloat deltaTime)
+{
+	GLfloat velocity = moveSpeed * deltaTime;
+
+	position[1] = 65.324623;
+
+
+	if (keys[GLFW_KEY_W])
+	{
+		position[0] += front[1] * velocity;
+	}
+
+	if (keys[GLFW_KEY_S])
+	{
+		position[0] -= front[1] * velocity;
+	}
+
+	if (keys[GLFW_KEY_A])
+	{
+		position[2] -= right[2] * velocity;
+	}
+
+	if (keys[GLFW_KEY_D])
+	{
+		position[2] += right[2] * velocity;
+	}
+}
+
+
+
+
+void Camera::mouseControlAerea(GLfloat xChange, GLfloat yChange)
+{
+	xChange *= turnSpeed;
+	yChange *= turnSpeed;
+
+	yaw += xChange;
+	pitch += yChange;
+	
+	front[0] = 0.002127;
+	front[1] = -0.999848;
+	front[2] = 0.017322;
+
+	up[0] = 0.121851;
+	up[1] = 0.017452;
+	up[2] = 0.992395;
+
+
+	if (pitch > 89.0f)
+	{
+		pitch = 89.0f;
+	}
+
+	if (pitch < -89.0f)
+	{
+		pitch = -89.0f;
+	}
+
+	front = glm::normalize(front);
+	right = glm::normalize(glm::cross(front, worldUp));
+	up = glm::normalize(glm::cross(right,front));
+
+}
+
 glm::mat4 Camera::calculateViewMatrix()
 {
+
+	posX = position[0];
+	posY = position[1];
+	posZ = position[2];
+	frontX = front[0];
+	frontY = front[1];
+	frontZ = front[2];
+	upX = up[0];
+	upY = up[1];
+	upZ = up[2];
+
 	return glm::lookAt(position, position + front, up);
+
 }
 
 glm::vec3 Camera::getCameraPosition()

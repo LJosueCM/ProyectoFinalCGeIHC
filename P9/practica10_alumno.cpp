@@ -7,24 +7,20 @@
 #include <vector>
 #include <glew.h>
 #include <glfw3.h>
-
 #include <glm.hpp>
 #include <gtc\matrix_transform.hpp>
 #include <gtc\type_ptr.hpp>
-//para probar el importer
-//#include<assimp/Importer.hpp>
-
 #include "Window.h"
 #include "Mesh_texturizado.h"
 #include "Shader_light.h"
 #include "Camera.h"
 #include "Texture.h"
+
 //para iluminación
 #include "CommonValues.h"
 #include "DirectionalLight.h"
 #include "PointLight.h"
 #include "Material.h"
-
 #include"Model.h"
 #include "Skybox.h"
 #include"SpotLight.h"
@@ -36,6 +32,8 @@ Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 Camera camera;
+
+
 
 Texture brickTexture;
 Texture dirtTexture;
@@ -66,10 +64,17 @@ Model stone;
 Model RoadsFair;
 Model Bath;
 Model Kart;
-Model Noria;
 Model BaseTree;
 Model Hojas;
 Model Tree;
+Model Globos;
+Model HotDog;
+Model Coke;
+Model Cotton;
+Model Corn;
+Model Kilahuea;
+Model Noria;
+Model Pan;
 
 Skybox skybox;
 Skybox skybox2;
@@ -80,6 +85,7 @@ GLfloat lastTime = 0.0f;
 
 int cont=0;
 float hora = 0.0;
+int camara1 = 1, camara2 = 0;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -196,7 +202,7 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
-int main() 
+int main()
 {
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
 	mainWindow.Initialise();
@@ -206,7 +212,7 @@ int main()
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 0.5f);
 
-	
+
 	plainTexture = Texture("Textures/pasto.png");
 	plainTexture.LoadTextureA();
 	Hojas1 = Texture("Textures/leafs1.tga");
@@ -246,7 +252,31 @@ int main()
 
 	//noria
 	Noria = Model();
-	Noria.LoadModel("Models/truck.obj");
+	Noria.LoadModel("Models/noria.obj");
+	
+	//Kilahue
+	Kilahuea = Model();
+	Kilahuea.LoadModel("Models/kilauea.obj");
+
+	//Carrito de globos
+	Globos = Model();
+	Globos.LoadModel("Models/balloon.obj");
+
+	//carrito de hotdogs
+	HotDog = Model();
+	HotDog.LoadModel("Models/hotdog.obj");
+
+	//carrito de algodon de azucar
+	Cotton = Model();
+	Cotton.LoadModel("Models/CottonCandy.obj");
+
+	//Puesto de elotes
+	Corn = Model();
+	Corn.LoadModel("Models/elotes.obj");
+
+	//Maquina de refrescos
+	Coke = Model();
+	Coke.LoadModel("Models/coke.obj");
 
 	//arbol
 	BaseTree = Model();
@@ -257,6 +287,10 @@ int main()
 	//Bath
 	Bath = Model();
 	Bath.LoadModel("Models/bathroom.obj");
+
+	//Camion pan de feria
+	Pan = Model();
+	Pan.LoadModel("Models/truck.obj");
 
 
 	//luz direccional, sólo 1 y siempre debe de existir
@@ -349,8 +383,22 @@ int main()
 			}
 		}
 
-		camera.keyControl(mainWindow.getsKeys(), deltaTime);
-		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+
+		//Camara libre :v
+		if(camara1 == 1)
+		{ 
+			camera.keyControl(mainWindow.getsKeys(), deltaTime);
+			camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
+			}
+		else if (camara2 == 1)
+		{
+
+
+			camera.keyControlAerea(mainWindow.getsKeys(), deltaTime);
+			camera.mouseControlAerea(0, 0);
+
+		}
+
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -399,7 +447,7 @@ int main()
 		plainTexture.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
-		
+
 		
 		//lUMINARIA
 		model = glm::mat4(1.0);
@@ -416,15 +464,61 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
 
-		//noria
+		/******************************************************* JUEGOS MECANICOS *********************************************************************************/
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(0.0f, -2.0f, -3.0f));
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Noria.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -28.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.7f, 0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Kilahuea.RenderModel();
+
+		/***************************************************************** ELEMENTOS EXTRA **************************************************************************/
 		
-		
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -22.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Globos.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -18.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		HotDog.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -18.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Cotton.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -22.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Corn.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(8.0f, -2.0f, -25.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::rotate(model, 270 * toRadians, glm::vec3(00.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Pan.RenderModel();
 
 		//Entrada a la feria
 			//pared izquierda
@@ -595,7 +689,6 @@ int main()
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			wall.RenderModel();
 
-
 			//path
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(0.0f, -2.05f, 0.0f));
@@ -704,7 +797,6 @@ int main()
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			Kart.RenderModel();
 
-
 			//baño Cambiar escala y posicion 
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));
@@ -713,11 +805,6 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			Bath.RenderModel();
-
-		
-		
-
-			
 
 
 		mainWindow.swapBuffers();

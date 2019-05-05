@@ -1,4 +1,10 @@
 #include "Window.h"
+
+extern GLfloat posX, posY, posZ;
+extern GLfloat frontX, frontY, frontZ;
+extern GLfloat upX, upY, upZ;
+extern GLint camara1, camara2;
+
 Window::Window()
 {
 	width = 800;
@@ -104,6 +110,37 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		const char* key_name = glfwGetKeyName(GLFW_KEY_D, 0);
 		printf("se presiono la tecla: %s\n",key_name);
+	}
+
+	if (key == GLFW_KEY_N && action == GLFW_PRESS)
+	{
+	
+
+		printf("PosX: %f\n", posX);
+		printf("PosY: %f\n", posY);
+		printf("PosZ: %f\n", posZ);
+		printf("frontX: %f\n", frontX);
+		printf("frontY: %f\n", frontY);
+		printf("frontZ: %f\n", frontZ);
+		printf("UpX: %f\n", upX);
+		printf("UpY: %f\n", upY);
+		printf("UpZ: %f\n", upZ);
+
+	
+	}
+
+	if (key == GLFW_KEY_C && action == GLFW_PRESS)
+	{
+		camara2 = 1;
+		camara1 = 0;
+
+	}
+
+	if (key == GLFW_KEY_M && action == GLFW_PRESS)
+	{
+		camara1 = 1;
+		camara2 = 0;
+
 	}
 
 
