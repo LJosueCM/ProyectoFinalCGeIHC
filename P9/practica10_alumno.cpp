@@ -75,6 +75,7 @@ Model Corn;
 Model Kilahuea;
 Model Noria;
 Model Pan;
+Model Mesa;
 
 Skybox skybox;
 Skybox skybox2;
@@ -292,6 +293,10 @@ int main()
 	Pan = Model();
 	Pan.LoadModel("Models/truck.obj");
 
+	//Mesa picnic
+	Mesa = Model();
+	Mesa.LoadModel("Models/mesa.obj");
+
 
 	//luz direccional, sólo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f, 
@@ -467,14 +472,14 @@ int main()
 		/******************************************************* JUEGOS MECANICOS *********************************************************************************/
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Noria.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -28.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 0.7f, 0.5f));
+		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Kilahuea.RenderModel();
@@ -482,40 +487,64 @@ int main()
 		/***************************************************************** ELEMENTOS EXTRA **************************************************************************/
 		
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -22.0f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.33f, 0.33f, 0.33f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Globos.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -18.0f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(18.2f, -2.0f, -12.0f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		HotDog.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -18.0f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(16.2f, -2.0f, -12.5f));
+		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Coke.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.38f, 0.38f, 0.38f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Cotton.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -22.0f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -16.5f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Mesa.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-8.5f, -2.0f, -16.5f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
+		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_opaco.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Mesa.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -20.0f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Corn.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(8.0f, -2.0f, -25.0f));
-		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
-		model = glm::rotate(model, 270 * toRadians, glm::vec3(00.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(12.5f, -2.0f, -27.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+//		model = glm::rotate(model, 270 * toRadians, glm::vec3(00.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Pan.RenderModel();
@@ -780,7 +809,7 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			stone.RenderModel();
-
+			/*
 			//pista gokarts	
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(6.5f, -1.95f, -11.8f));
@@ -796,7 +825,7 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			Kart.RenderModel();
-
+			*/
 			//baño Cambiar escala y posicion 
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));

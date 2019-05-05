@@ -74,27 +74,27 @@ void Camera::keyControlAerea(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
 
-	position[1] = 65.324623;
+	position[1] = 35.324623;
 
 
-	if (keys[GLFW_KEY_W])
+	if (keys[GLFW_KEY_D])
 	{
 		position[0] += front[1] * velocity;
 	}
 
-	if (keys[GLFW_KEY_S])
+	if (keys[GLFW_KEY_A])
 	{
 		position[0] -= front[1] * velocity;
 	}
 
-	if (keys[GLFW_KEY_A])
+	if (keys[GLFW_KEY_S])
 	{
-		position[2] -= right[2] * velocity;
+		position[2] -= right[2] * velocity*6.0;
 	}
 
-	if (keys[GLFW_KEY_D])
+	if (keys[GLFW_KEY_W])
 	{
-		position[2] += right[2] * velocity;
+		position[2] += right[2] * velocity*6.0;
 	}
 }
 
