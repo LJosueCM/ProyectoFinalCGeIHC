@@ -1,0 +1,131 @@
+newmtl bottle1:Material
+illum 4
+Kd 0.60 0.60 0.60
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl globo1:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.82 0.82 0.82
+map_Kd red.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl globo2:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.82 0.82 0.82
+map_Kd orange.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl globo3:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.82 0.82 0.82
+map_Kd red.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl globo4:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.82 0.82 0.82
+map_Kd yellow.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl globo5:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.82 0.82 0.82
+map_Kd pink.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cafe.tga
+Ni 1.00
+newmtl lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cafe.tga
+Ni 1.00
+newmtl lambert4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cafe.tga
+Ni 1.00
+newmtl pasted__pasted__pasted__anisotropic4SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd black.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__pasted__pasted__pasted__anisotropic4SG3
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd black.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__phong7SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd cafe.tga
+Ni 1.00
+newmtl pasted__typeBlinnSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd white.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl typeBlinnSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.50 0.50 0.50

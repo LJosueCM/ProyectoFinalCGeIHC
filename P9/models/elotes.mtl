@@ -1,0 +1,202 @@
+newmtl anafre:None
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd black.tga
+Ni 1.00
+Ks 0.80 0.80 0.80
+Ns 0.00
+newmtl olla1:CwHROM
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd gray3.tga
+Ni 1.00
+Ks 0.24 0.24 0.24
+Ns 96.08
+newmtl olla1:metall_05_kitche
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd gray3.tga
+Ni 1.00
+Ks 0.32 0.32 0.32
+Ns 96.08
+newmtl pasted__CornCobSG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.59 0.59 0.59
+Tf 1.00 1.00 1.00
+map_Kd CORN.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 0.00
+newmtl pasted__anisotropic1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd mayo.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__anisotropic2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd mayobase.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Table_BaseColor.tga
+Ni 1.00
+newmtl pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd red.tga
+Ni 1.00
+newmtl pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd queso.tga
+Ni 1.00
+newmtl pasted__lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd wood.jpg
+Ni 1.00
+newmtl pasted__pasted__anisotropic1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd mayo.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__pasted__anisotropic2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd mayobase.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__pasted__lambert3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd red.tga
+Ni 1.00
+newmtl pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd palos1.tga
+Ni 1.00
+newmtl pasted__pasted__lambert6SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd wood.jpg
+Ni 1.00
+newmtl pasted__pasted__pasted__lambert5SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd chile1.tga
+Ni 1.00
+newmtl tapa:blue_003
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tapa1:blue_003
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tapa2:blue_003
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd blue.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper1:___Default
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 0.89 0.89 0.89
+map_Kd 
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper1:blue_003
+illum 4
+Kd 0.00 0.27 0.72
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper2:___Default
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 0.89 0.89 0.89
+map_Kd 
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper2:blue_003
+illum 4
+Kd 0.00 0.27 0.72
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper3:___Default
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 0.89 0.89 0.89
+map_Kd 
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tupper3:blue_003
+illum 4
+Kd 0.00 0.27 0.72
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08

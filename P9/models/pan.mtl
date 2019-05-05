@@ -1,0 +1,204 @@
+newmtl Countertop_toaster_ovenSG
+illum 4
+Kd 0.50 0.50 0.50
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Folding_table_60_x_30SG
+illum 4
+Kd 0.88 0.88 0.78
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl Group_60SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Wood_Veneer_01.jpg
+Ni 1.00
+newmtl Group_99SG
+illum 4
+Kd 0.38 0.38 0.38
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID273SG
+illum 4
+Kd 1.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 0.50 0.50 0.50
+Ni 1.00
+newmtl ID649SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID657SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID681SG
+illum 4
+Kd 0.12 0.12 0.12
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID705SG
+illum 4
+Kd 0.80 0.82 0.82
+Ka 0.20 0.20 0.20
+Tf 0.50 0.50 0.50
+Ni 1.00
+newmtl ID705SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 0.88 0.88 0.88
+Ni 1.00
+newmtl ID723SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID743SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 0.60 0.60 0.60
+map_Kd __Glass_Gold_Tint_.jpg
+Ni 1.00
+newmtl ID877SG
+illum 4
+Kd 0.25 0.25 0.25
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID885SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Formica_Laminate_Dark.jpg
+Ni 1.00
+newmtl ID1196SG
+illum 4
+Kd 1.00 1.00 1.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID1232SG
+illum 4
+Kd 0.74 0.74 0.74
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID1256SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Wood_Veneer_01_0.jpg
+Ni 1.00
+newmtl ID1256SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd Formica_Blue.jpg
+Ni 1.00
+newmtl ID1292SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+map_Kd __Wood_Bamboo_2.jpg
+Ni 1.00
+newmtl ID1432SG
+illum 4
+Kd 0.63 0.32 0.18
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID1577SG
+illum 4
+Kd 0.32 0.32 0.32
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl ID1643SG
+illum 4
+Kd 0.24 0.22 0.00
+Ka 0.20 0.20 0.20
+Tf 0.60 0.60 0.60
+Ni 1.00
+newmtl ID1659SG
+illum 4
+Kd 0.14 0.14 0.14
+Ka 0.20 0.20 0.20
+Tf 0.61 0.61 0.61
+Ni 1.00
+newmtl ID1732SG
+illum 4
+Kd 0.55 0.47 0.45
+Ka 0.20 0.20 0.20
+Tf 0.50 0.50 0.50
+Ni 1.00
+newmtl Wiper_1SG
+illum 4
+Kd 0.14 0.14 0.14
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl _1992__GM__DT2700SG
+illum 4
+Kd 0.23 0.23 0.23
+Ka 0.20 0.20 0.20
+Tf 1.00 1.00 1.00
+Ni 1.00
+newmtl anisotropic1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd varillauv.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd panes1.tga
+Ni 1.00
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd carpa.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong3SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd letrero1.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong4SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd letrero1.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00

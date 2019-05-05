@@ -43,6 +43,7 @@ Texture plainTexture;
 Texture dadoTexture;
 Texture pisoTexture;
 Texture Tagave;
+Texture Hojas1;
 //materiales
 Material Material_brillante;
 Material Material_opaco;
@@ -66,6 +67,9 @@ Model RoadsFair;
 Model Bath;
 Model Kart;
 Model Noria;
+Model BaseTree;
+Model Hojas;
+Model Tree;
 
 Skybox skybox;
 Skybox skybox2;
@@ -205,6 +209,8 @@ int main()
 	
 	plainTexture = Texture("Textures/pasto.png");
 	plainTexture.LoadTextureA();
+	Hojas1 = Texture("Textures/leafs1.tga");
+	Hojas1.LoadTextureA();
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
 	Kitt_M = Model();
@@ -240,7 +246,13 @@ int main()
 
 	//noria
 	Noria = Model();
-	Noria.LoadModel("Models/noria.obj");
+	Noria.LoadModel("Models/truck.obj");
+
+	//arbol
+	BaseTree = Model();
+	BaseTree.LoadModel("Models/basetree.obj");
+	Hojas = Model();
+	Hojas.LoadModel("Models/hojas.obj");
 
 	//Bath
 	Bath = Model();
@@ -404,6 +416,7 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
 
+		//noria
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(0.0f, -2.0f, -3.0f));
 		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -411,6 +424,8 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Noria.RenderModel();
 		
+		
+
 		//Entrada a la feria
 			//pared izquierda
 			model = glm::mat4(1.0);
@@ -700,8 +715,7 @@ int main()
 			Bath.RenderModel();
 
 		
-
-			glUseProgram(0);
+		
 
 			
 
