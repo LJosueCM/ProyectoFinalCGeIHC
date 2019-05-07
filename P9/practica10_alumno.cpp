@@ -322,10 +322,10 @@ int main()
 	spotLightCount++;
 
 	//luz fija
-	spotLights[1] = SpotLight(0.0f, 0.0f, 1.0f,
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
 		0.0f, 2.0f,
 		10.0f, 0.0f, 0.0f,
-		0.0f, -5.0f, 0.0f,
+		-.5f, -5.0f, -29.0f,
 		1.0f, 0.0f, 0.0f,
 		10.0f);
 	spotLightCount++;
@@ -487,7 +487,7 @@ int main()
 		/***************************************************************** ELEMENTOS EXTRA **************************************************************************/
 		
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -20.0f));
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -19.0f));
 		model = glm::scale(model, glm::vec3(0.33f, 0.33f, 0.33f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
@@ -495,7 +495,7 @@ int main()
 
 		model = glm::mat4(1.0);
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(18.2f, -2.0f, -12.0f));
+		model = glm::translate(model, glm::vec3(17.5f, -2.0f, -12.0f));
 		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
@@ -503,14 +503,14 @@ int main()
 
 		model = glm::mat4(1.0);
 		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(16.2f, -2.0f, -12.5f));
+		model = glm::translate(model, glm::vec3(15.2f, -2.0f, -12.5f));
 		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Coke.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -20.0f));
+		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -19.0f));
 		model = glm::scale(model, glm::vec3(0.38f, 0.38f, 0.38f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -518,7 +518,7 @@ int main()
 		Cotton.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -16.5f));
+		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -15.5f));
 		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -526,7 +526,7 @@ int main()
 		Mesa.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-8.5f, -2.0f, -16.5f));
+		model = glm::translate(model, glm::vec3(-8.5f, -2.0f, -15.5f));
 		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -534,7 +534,7 @@ int main()
 		Mesa.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -20.0f));
+		model = glm::translate(model, glm::vec3(-8.0f, -2.0f, -19.0f));
 		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
 		//model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -809,24 +809,56 @@ int main()
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			stone.RenderModel();
-			/*
-			//pista gokarts	
+
+			//Camino para la noria
 			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(6.5f, -1.95f, -11.8f));
-			model = glm::scale(model, glm::vec3(0.55f, 0.55f, 0.55f));
-			model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+			model = glm::translate(model, glm::vec3(-2.3f, -2.05f, -8.1f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			RoadsFair.RenderModel();
-			//kart
+			stone.RenderModel();
 			model = glm::mat4(1.0);
-			model = glm::translate(model, glm::vec3(4.0f, -1.95f, -8.8f));
-			model = glm::scale(model, glm::vec3(0.008f, 0.008f, 0.008f));
+			model = glm::translate(model, glm::vec3(-4.6f, -2.05f, -8.1f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-			Kart.RenderModel();
-			*/
-			//baño Cambiar escala y posicion 
+			stone.RenderModel();
+			 //Camino para kilauea
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-2.7f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-5.4f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-8.1f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-10.8f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+			model = glm::mat4(1.0);
+			model = glm::translate(model, glm::vec3(-13.1f, -2.05f, -21.6f));
+			model = glm::scale(model, glm::vec3(0.2f, 0.3f, 0.3f));
+			glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+			stone.RenderModel();
+
+
+			
+		
+			//baño 
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));
 			model = glm::scale(model, glm::vec3(0.006f, 0.006f, 0.006f));
