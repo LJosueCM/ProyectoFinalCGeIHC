@@ -1,6 +1,5 @@
 
 #define STB_IMAGE_IMPLEMENTATION
-
 #include <stdio.h>
 #include <string.h>
 #include <cmath>
@@ -25,6 +24,12 @@
 #include "Skybox.h"
 #include"SpotLight.h"
 
+//para audio
+#include <iostream>
+#include <irrKlang.h>
+
+
+using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
 bool avanza;
@@ -214,6 +219,15 @@ int main()
 	CreateShaders();
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 5.0f, 0.5f);
+
+	ISoundEngine* engine = createIrrKlangDevice();
+
+	if (!engine)
+		return 0;
+
+	// Aqui mando el mp3 ***********************************
+
+	engine->play2D("Audio/lon-lon-ranch.mp3", true);
 
 
 	plainTexture = Texture("Textures/pasto.png");
@@ -459,8 +473,7 @@ int main()
 		plainTexture.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
-
-		
+	
 		//lUMINARIA
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-1.2, -2.0f, -1.0f));
@@ -862,9 +875,6 @@ int main()
 			Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 			stone.RenderModel();
 
-
-			
-		
 			//baño 
 			model = glm::mat4(1.0);
 			model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));
@@ -878,5 +888,6 @@ int main()
 		mainWindow.swapBuffers();
 	}
 
+	engine->drop();
 	return 0;
 }
