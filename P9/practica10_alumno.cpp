@@ -38,15 +38,7 @@ std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 Camera camera;
 
-
-
-Texture brickTexture;
-Texture dirtTexture;
 Texture plainTexture;
-Texture dadoTexture;
-Texture pisoTexture;
-Texture Tagave;
-Texture Hojas1;
 //materiales
 Material Material_brillante;
 Material Material_opaco;
@@ -80,6 +72,7 @@ Model Coke;
 Model Cotton;
 Model Corn;
 Model Kilahuea;
+Model Kilahuea_cabina;
 Model Noria;
 Model Pan;
 Model Mesa;
@@ -94,6 +87,8 @@ GLfloat lastTime = 0.0f;
 int cont=0;
 float hora = 0.0;
 int camara1 = 1, camara2 = 0;
+int encendido_Kilahuea, posy_Kilahuea = -2.0;
+int encedidospot_1 = 0, luz_1;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -232,18 +227,9 @@ int main()
 
 	plainTexture = Texture("Textures/pasto.png");
 	plainTexture.LoadTextureA();
-	Hojas1 = Texture("Textures/leafs1.tga");
-	Hojas1.LoadTextureA();
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
-	Kitt_M = Model();
-	Kitt_M.LoadModel("Models/kitt.3ds");
-	Llanta_M = Model();
-	Llanta_M.LoadModel("Models/k_rueda.3ds");
-	Blackhawk_M = Model();
-	Blackhawk_M.LoadModel("Models/uh60.obj");
-	Camino_M = Model();
-	Camino_M.LoadModel("Models/railroad track.obj");
+
 
 	//LUMINARIA
 	street_Lamp = Model();
@@ -273,7 +259,9 @@ int main()
 	
 	//Kilahue
 	Kilahuea = Model();
-	Kilahuea.LoadModel("Models/kilauea.obj");
+	Kilahuea.LoadModel("Models/base.obj");
+	Kilahuea_cabina = Model();
+	Kilahuea_cabina.LoadModel("Models/cabina.obj");
 
 	//Carrito de globos
 	Globos = Model();
@@ -320,33 +308,14 @@ int main()
 								0.0f, 0.0f, -1.0f);
 //contador de luces puntuales
 	
-	unsigned int spotLightCount = 0;
-	unsigned int pointLightCount = 0;
-	//linterna
-	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
-		0.0f, 2.0f,
-		0.0f, 0.0f, 0.0f,
-		0.0f, -1.0f, 0.0f,
-		1.0f, 0.0f, 0.0f,
-		20.0f);
-	spotLightCount++;
-
-	//luz fija
-	spotLights[1] = SpotLight(0.0f, 1.0f, 1.0f, //vector de color
-		0.0f, 2.0f,
-		10.0f, 0.0f, 0.0f,
-		1.4f, -5.0f, -29.0f, //direccion
-		1.0f, 0.0f, 0.0f,
-		10.0f);
-	spotLightCount++;
 
 	//Luz puntual 
 
-	pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
+	/*pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
 		0.0f, 1.0f,
 		-8.0f, 1.0f, -2.0f, //estas son las coordenadas
 		0.0f, -1.0f, 0.0f);
-	pointLightCount++;
+	pointLightCount++;*/
 
 
 
@@ -395,6 +364,39 @@ int main()
 		//Recibir eventos del usuario
 		glfwPollEvents();
 
+		//Luces spotlight
+
+		unsigned int spotLightCount = 0;
+		unsigned int pointLightCount = 0;
+		//linterna
+		spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+			0.0f, 2.0f,
+			0.0f, 0.0f, 0.0f,
+			0.0f, -1.0f, 0.0f,
+			1.0f, 0.0f, 0.0f,
+			20.0f);
+		spotLightCount++;
+
+		//luz fija
+		spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f, //vector de color
+			0.0f, 2.0f,
+			-8.0f, 24.0f, -30.0f, //posicion
+			0.0f, -15.0f, 0.0f, //direccion
+			1.0f, 0.0f, 0.0f,
+			12.0f); //Angulo de apertura
+		spotLightCount++;
+
+
+		spotLights[2] = SpotLight(1.0f, 1.0f, 1.0f, //vector de color
+			0.0f, 2.0f,
+			-1.5f, 24.0f, -30.0f, //posicion
+			0.0f, -15.0f, 0.0f, //direccion
+			1.0f, 0.0f, 0.0f,
+			12.0f); //Angulo de apertura
+		spotLightCount++;
+
+
+
 		//contador para cambiar de hora cada cierto tiempo
 		//de esta forma cambiamos el skybox de acuerdo a la hora del dia.
 		while (cont != 500000000) {
@@ -421,6 +423,19 @@ int main()
 
 			camera.keyControlAerea(mainWindow.getsKeys(), deltaTime);
 			camera.mouseControlAerea(0, 0);
+
+		}
+
+		/********************************* Movimiento del Kilahuea *********************************/
+		if (encendido_Kilahuea == 1) { //15 es la posicion maxxima 
+				posy_Kilahuea += 0.1;
+				
+		}
+
+		/***********************************Luces**********************/
+		if (encedidospot_1 = 1) {
+			luz_1 = -8.0;
+			printf("Luz spoth: %S", luz_1);
 
 		}
 
@@ -503,6 +518,14 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Kilahuea.RenderModel();
+
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-7.5f, 15.0f, -29.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Kilahuea_cabina.RenderModel();
 
 		/***************************************************************** ELEMENTOS EXTRA **************************************************************************/
 		

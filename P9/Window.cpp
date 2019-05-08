@@ -4,6 +4,8 @@ extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
 extern GLfloat upX, upY, upZ;
 extern GLint camara1, camara2;
+extern GLint encendido_Kilahuea, apagado_kilahuea;
+extern GLint encedidospot_1, apagadospot_1;
 
 Window::Window()
 {
@@ -128,7 +130,7 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 
 	
 	}
-
+	/******************Botones para la camara aerea******************/
 	if (key == GLFW_KEY_C && action == GLFW_PRESS)
 	{
 		camara2 = 1;
@@ -142,7 +144,20 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		camara2 = 0;
 
 	}
+	/**********************Botones para el kilahuea**************************/
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+	{
+		encendido_Kilahuea = 1;
 
+	}
+
+	/*********************** Para las luces ****************/
+	if (key == GLFW_KEY_P && action == GLFW_PRESS)
+	{
+		encedidospot_1 = 1;
+
+	}
+	
 
 
 	if (key >= 0 && key < 1024)
