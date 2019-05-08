@@ -1,10 +1,10 @@
 ﻿  practica10_alumno.cpp
 c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(371): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(385): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(377): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(391): warning C4305: '+=': truncamiento de 'double' a 'float'
   Generando código
-  0 of 1066 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 1066 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada

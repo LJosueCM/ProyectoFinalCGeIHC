@@ -47,7 +47,9 @@ Material Material_brillante;
 Material Material_opaco;
 //luz direccional
 DirectionalLight mainLight;
-//para declarar varias luces de tipo pointlight
+
+
+/************************************Declaracion de las luces de ambos tipos*********************************/
 PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
 
@@ -303,15 +305,9 @@ int main()
 								0.3f, 0.3f,
 								0.0f, 0.0f, -1.0f);
 //contador de luces puntuales
-	unsigned int pointLightCount = 0;
-	//Declaración de primer luz puntual
-	pointLights[0] = PointLight(1.0f, 0.0f, 0.0f,
-								0.0f, 1.0f,
-								2.0f, 1.5f,1.5f,
-								0.3f, 0.2f, 0.1f);
-	pointLightCount++;
 	
 	unsigned int spotLightCount = 0;
+	unsigned int pointLightCount = 0;
 	//linterna
 	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
 		0.0f, 2.0f,
@@ -322,13 +318,23 @@ int main()
 	spotLightCount++;
 
 	//luz fija
-	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
+	spotLights[1] = SpotLight(0.0f, 1.0f, 1.0f, //vector de color
 		0.0f, 2.0f,
 		10.0f, 0.0f, 0.0f,
-		-.5f, -5.0f, -29.0f,
+		1.4f, -5.0f, -29.0f, //direccion
 		1.0f, 0.0f, 0.0f,
 		10.0f);
 	spotLightCount++;
+
+	//Luz puntual 
+
+	pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
+		0.0f, 1.0f,
+		-8.0f, 1.0f, -2.0f, //estas son las coordenadas
+		0.0f, -1.0f, 0.0f);
+	pointLightCount++;
+
+
 
 	//skybox para dia
 	std::vector<std::string> skyboxFaces;
@@ -436,6 +442,7 @@ int main()
 		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
 
 		shaderList[0].SetDirectionalLight(&mainLight);
+		//Luces
 		shaderList[0].SetPointLights(pointLights, pointLightCount);
 		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
