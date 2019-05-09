@@ -436,11 +436,11 @@ int main()
 
 		//Luz puntual
 
-		/*pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
+		pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
 			0.0f, 1.0f,
 			-8.0f, 1.0f, -2.0f, //estas son las coordenadas
 			0.0f, -1.0f, 0.0f);
-		pointLightCount++;*/
+		pointLightCount++;
 
 		/********************************APAGAR LUCES SPOTLIGHT********************************/
 
