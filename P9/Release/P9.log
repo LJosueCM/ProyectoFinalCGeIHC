@@ -1,20 +1,97 @@
-﻿  Window.cpp
-c:\users\l.j.mier\documents\proyecto final\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+﻿  Camera.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(77): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(92): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(97): warning C4244: '+=': conversión de 'double' a 'T'; posible pérdida de datos
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(112): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(113): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(114): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(116): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(117): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+c:\users\l.j.mier\documents\proyecto final\p9\camera.cpp(118): warning C4305: '=': truncamiento de 'double' a 'T'
+          with
+          [
+              T=float
+          ]
+  DirectionalLight.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\directionallight.cpp(18): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\directionallight.cpp(19): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\directionallight.cpp(21): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\directionallight.cpp(22): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+  Light.cpp
+  Material.cpp
+  Mesh_tn.cpp
+  Model.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(15): warning C4477: 'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'const std::string'
+c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(15): warning C4474: "printf": se pasaron demasiados argumentos para la cadena de formato
+  c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(15): note: los marcadores de posición y sus parámetros esperan 1 argumentos variádicos, pero se proporcionaron 2
+c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(50): warning C4804: '<': uso no seguro del tipo 'bool' en la operación
+c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(50): warning C4018: '<': no coinciden signed/unsigned
+c:\users\l.j.mier\documents\proyecto final\p9\model.cpp(132): warning C4477: 'printf' : la cadena de formato '%s' requiere un argumento de tipo 'char *', pero el argumento variádico 1 tiene el tipo 'std::string'
+  PointLight.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(28): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(29): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(30): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(32): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(33): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(34): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\pointlight.cpp(35): warning C4244: 'argumento': conversión de 'GLfloat' a 'GLint'; posible pérdida de datos
+  practica10_alumno.cpp
 c:\users\l.j.mier\documents\proyecto final\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(187): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(188): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(368): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(386): warning C4305: '+=': truncamiento de 'double' a 'float'
+  Shader_light.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\shader_light.cpp(202): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\shader_light.cpp(201): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\shader_light.cpp(215): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\shader_light.cpp(214): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\shader_light.cpp(213): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
+  Skybox.cpp
+  SpotLight.cpp
+  Texture.cpp
+  Window.cpp
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(192): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
 c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(193): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(195): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(196): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-  practica10_alumno.cpp
-c:\users\l.j.mier\documents\proyecto final\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(367): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(385): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(197): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(198): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(200): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(201): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   Generando código
-  96 of 1070 functions ( 9.0%) were compiled, the rest were copied from previous compilation.
-    16 functions were new in current compilation
-    33 functions had inline decision re-evaluated but remain unchanged
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(79): warning C4715: 'Window::Initialise': no todas las rutas de acceso de control devuelven un valor
   Generación de código finalizada
+  All 1070 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   P9.vcxproj -> C:\Users\L.J.Mier\Documents\Proyecto Final\Release\P9.exe
