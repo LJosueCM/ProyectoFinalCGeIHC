@@ -1,24 +1,20 @@
 ﻿  Window.cpp
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(184): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(185): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(189): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(190): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(192): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.cpp(193): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(187): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(188): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(192): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(193): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(195): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.cpp(196): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   practica10_alumno.cpp
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(90): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(360): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(407): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(431): warning C4244: '+=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(437): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_cg\proyectofinalcgeihc\p9\practica10_alumno.cpp(438): warning C4477: 'printf' : la cadena de formato '%S' requiere un argumento de tipo 'wchar_t *', pero el argumento variádico 1 tiene el tipo 'int'
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(367): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(385): warning C4305: '+=': truncamiento de 'double' a 'float'
   Generando código
-  3 of 1057 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    9 functions had inline decision re-evaluated but remain unchanged
+  96 of 1070 functions ( 9.0%) were compiled, the rest were copied from previous compilation.
+    16 functions were new in current compilation
+    33 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  P9.vcxproj -> C:\Users\Elda\Desktop\Proyecto_CG\ProyectoFinalCGeIHC\Release\P9.exe
+  P9.vcxproj -> C:\Users\L.J.Mier\Documents\Proyecto Final\Release\P9.exe
