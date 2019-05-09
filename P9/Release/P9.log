@@ -1,4 +1,5 @@
-﻿  practica10_alumno.cpp
+﻿  Skybox.cpp
+  practica10_alumno.cpp
 c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(11): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(367): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
