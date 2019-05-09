@@ -95,8 +95,8 @@ GLfloat lastTime = 0.0f;
 int cont = 0;
 float hora = 0.0;
 int camara1 = 1, camara2 = 0;
-int apagarS1 = 0, apagarS2 = 0;
-float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f;
+int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0;
+float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = -10.5f, distancia_Luz2P = -10.5f ;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -434,24 +434,57 @@ int main()
 			12.0f); //Angulo de apertura
 		spotLightCount++;
 
-		//Luz puntual
+		/*******************************Luces POINTLIGHT*****************************************************/
 
-		pointLights[0] =PointLight(1.0f, 0.0f, 0.0f,
+		pointLights[0] =PointLight(0.0f, 1.0f, 0.0f,
 			0.0f, 1.0f,
-			-8.0f, 1.0f, -2.0f, //estas son las coordenadas
+			distanca_Luz1P, 2.0f, -3.0f, //estas son las coordenadas
 			0.0f, -1.0f, 0.0f);
 		pointLightCount++;
+
+
+		pointLights[1] = PointLight(0.0f, 0.0f, 1.0f,
+			0.0f, 1.0f,
+			distancia_Luz2P, 2.0f, -12.0f, //estas son las coordenadas
+			0.0f, -1.0f, 0.0f);
+		pointLightCount++;
+
 
 		/********************************APAGAR LUCES SPOTLIGHT********************************/
 
 		if (apagarS1 == 1) {
 			distancia_luz1 = -50.0f;
 		}
+		else if (apagarS1 == 2)
+			distancia_luz1 = -8.0f;
 
 		if (apagarS2 == 1) {
 			distancia_luz2 = 50.0f;
 		}
+		else if (apagarS2 == 2)
+		{
+			distancia_luz2 = -1.5f ;
+		}
+		/**************************************APAGAR LUCES POINTLIGHT*************************************************/
 
+		if (apagarP1 == 1) {
+			distanca_Luz1P = -50.0f;
+		}
+		else if (apagarP1 == 2)
+		{ 
+			distanca_Luz1P = -10.5f;
+		}
+		
+		if (apagarP2 == 1) {
+			distancia_Luz2P = -50.0f;
+		}
+		else if (apagarP2 == 2)
+		{
+			distancia_Luz2P = -10.5f;
+		}
+
+
+		
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
