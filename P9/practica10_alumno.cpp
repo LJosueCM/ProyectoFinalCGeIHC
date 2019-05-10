@@ -33,7 +33,7 @@ using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
 bool avanza, sube = 1, kilauea = 0;
-float altitud = 0.0f;
+float altitud = 0.0f, giro = 0.0f;
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
@@ -82,7 +82,9 @@ Model Cotton;
 Model Corn;
 Model Kilahuea;
 Model base_kilahuea;
-Model Noria;
+Model BaseNoria;
+Model RuedaNoria;
+Model CabinaNoria;
 Model Pan;
 Model Mesa;
 
@@ -272,8 +274,12 @@ int main()
 	Kart.LoadModel("Models/kart.obj");
 
 	//noria
-	Noria = Model();
-	Noria.LoadModel("Models/noria.obj");
+	BaseNoria = Model();
+	BaseNoria.LoadModel("Models/base_noria.obj");
+	RuedaNoria = Model();
+	RuedaNoria.LoadModel("Models/rueda.obj");
+	CabinaNoria = Model();
+	CabinaNoria.LoadModel("Models/cabinas.obj");
 
 	//Kilahue
 	Kilahuea = Model();
@@ -518,6 +524,10 @@ int main()
 		}
 		else { altitud = 0.0f; }
 
+		//movimiento noria
+		giro += 0.1f;
+		if (giro >= 360) { giro = 0.0f; }
+
 
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
@@ -571,7 +581,20 @@ int main()
 		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Noria.RenderModel();
+		BaseNoria.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, 6.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+		model = glm::rotate(model, giro * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		RuedaNoria.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
