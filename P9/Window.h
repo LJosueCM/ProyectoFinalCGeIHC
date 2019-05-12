@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<glew.h>
 #include<glfw3.h>
+extern bool kilauea;
 class Window
 {
 public:

@@ -32,7 +32,8 @@
 using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
-bool avanza;
+bool avanza, sube = 1, kilauea = 0;
+float altitud = 0.0f;
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
@@ -449,6 +450,7 @@ int main()
 			0.0f, -1.0f, 0.0f);
 		pointLightCount++;
 
+	
 
 		/********************************APAGAR LUCES SPOTLIGHT********************************/
 
@@ -468,11 +470,11 @@ int main()
 		/**************************************APAGAR LUCES POINTLIGHT*************************************************/
 
 		if (apagarP1 == 1) {
-			distanca_Luz1P = -50.0f;
+			distanca_Luz1P = -80.0f;
 		}
 		else if (apagarP1 == 2)
 		{ 
-			distanca_Luz1P = -10.5f;
+			distanca_Luz1P = -80.5f;
 		}
 		
 		if (apagarP2 == 1) {
@@ -503,6 +505,20 @@ int main()
 		else if (hora > 10.0 && hora <= 21.0) {
 			skybox3.DrawSkybox(camera.calculateViewMatrix(), projection);
 		}
+
+		//movimiento del kilauea
+		if (kilauea == 1) {
+			if (sube == 1) {
+				altitud += 0.05f;
+				if (altitud >= 16.0f) { sube = 0; }
+			}
+			else {
+				altitud -= 0.05f;
+				if (altitud <= 0.0f) { sube = 1; }
+			}
+		}
+		else { altitud = 0.0f; }
+
 
 		shaderList[0].UseShader();
 		uniformModel = shaderList[0].GetModelLocation();
@@ -550,6 +566,14 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
 
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-1.2f, -2.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		street_Lamp.RenderModel();
+
+
 		/******************************************************* JUEGOS MECANICOS *********************************************************************************/
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
@@ -567,6 +591,7 @@ int main()
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
+		model = glm::translate(model, glm::vec3(0.0f, altitud, 0.0f));
 		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);

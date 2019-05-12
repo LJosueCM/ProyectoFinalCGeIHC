@@ -40,7 +40,7 @@ int Window::Initialise()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//CREAR VENTANA
-	mainWindow = glfwCreateWindow(width, height, "Primer ventana", NULL, NULL);
+	mainWindow = glfwCreateWindow(width, height, "Proyecto Final :) para Roque0", NULL, NULL);
 
 	if (!mainWindow)
 	{
@@ -164,6 +164,14 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		apagarS2 = 2;
 
 	}
+
+	//movimiento kilauea
+	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+	{
+		if (kilauea == 1) { kilauea = 0; }
+		else { kilauea = 1; }
+	}
+
 	/******************************Para luces tipo point******************************************************************/
 	if (key == GLFW_KEY_L && action == GLFW_PRESS)
 	{
