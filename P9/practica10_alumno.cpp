@@ -33,7 +33,7 @@ using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
 bool avanza, sube = 1, kilauea = 0;
-float altitud = 0.0f;
+float altitud = 0.0f, giro = 0.0f;
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
@@ -82,8 +82,11 @@ Model Cotton;
 Model Corn;
 Model Kilahuea;
 Model base_kilahuea;
-Model Noria;
+Model BaseNoria;
+Model RuedaNoria;
+Model CabinaNoria;
 Model Pan;
+Model Duck;
 Model Mesa;
 
 Skybox skybox;
@@ -96,8 +99,8 @@ GLfloat lastTime = 0.0f;
 int cont = 0;
 float hora = 0.0;
 int camara1 = 1, camara2 = 0;
-int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0;
-float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = -10.5f, distancia_Luz2P = -10.5f ;
+int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0;
+float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f ;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -272,8 +275,12 @@ int main()
 	Kart.LoadModel("Models/kart.obj");
 
 	//noria
-	Noria = Model();
-	Noria.LoadModel("Models/noria.obj");
+	BaseNoria = Model();
+	BaseNoria.LoadModel("Models/base_noria.obj");
+	RuedaNoria = Model();
+	RuedaNoria.LoadModel("Models/rueda.obj");
+	CabinaNoria = Model();
+	CabinaNoria.LoadModel("Models/cabinas.obj");
 
 	//Kilahue
 	Kilahuea = Model();
@@ -319,6 +326,9 @@ int main()
 	Mesa = Model();
 	Mesa.LoadModel("Models/mesa.obj");
 
+
+	Duck = Model();
+	Duck.LoadModel("Models/10602_Rubber_Duck_v1_L3.obj");
 
 	//luz direccional, sólo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
@@ -410,13 +420,7 @@ int main()
 
 		/****************************************** LUCES SPOTLIGHT**********************************************/
 
-		spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
-			0.0f, 2.0f,
-			0.0f, 0.0f, 0.0f,
-			0.0f, -1.0f, 0.0f,
-			1.0f, 0.0f, 0.0f,
-			20.0f);
-		spotLightCount++;
+		
 
 		spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f, //vector de color
 			0.0f, 2.0f,
@@ -435,22 +439,55 @@ int main()
 			12.0f); //Angulo de apertura
 		spotLightCount++;
 
+
+		spotLights[3] = SpotLight(1.0f, 1.0f, 1.0f, //vector de color
+			0.0f, 2.0f,
+			-2.0f, 0.0f, -1.0f, //posicion
+			0.0f, -15.0f, 0.0f, //direccion
+			1.0f, 0.0f, 0.0f,
+			12.0f); //Angulo de apertura
+		spotLightCount++;
+
 		/*******************************Luces POINTLIGHT*****************************************************/
 
-		pointLights[0] =PointLight(0.0f, 1.0f, 0.0f,
-			0.0f, 1.0f,
-			distanca_Luz1P, 2.0f, -3.0f, //estas son las coordenadas
-			0.0f, -1.0f, 0.0f);
+		pointLights[0] =PointLight(1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f,
+			distanca_Luz1P, 0.90f, -23.0f, //estas son las coordenadas
+			0.1f, 0.1f, 0.1f);
 		pointLightCount++;
 
 
-		pointLights[1] = PointLight(0.0f, 0.0f, 1.0f,
-			0.0f, 1.0f,
-			distancia_Luz2P, 2.0f, -12.0f, //estas son las coordenadas
-			0.0f, -1.0f, 0.0f);
+		pointLights[1] = PointLight(1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f,
+			distancia_Luz2P, 0.90f, -10.0f, //estas son las coordenadas
+			0.1f, 0.1f ,0.1f);
 		pointLightCount++;
-
 	
+		pointLights[2] = PointLight(1.0f, 1.0f, 1.0f,
+			1.0f, 1.0f,
+			12.0f, 0.9f, -2.5f, //estas son las coordenadas
+			0.1f, 0.1f, 0.1f);
+		pointLightCount++;
+
+		//Luces de la entrada
+
+		if(luces_entrada == 1)
+		{ 
+			pointLights[3] = PointLight(0.0f, 0.0f, 1.0f,
+				1.0f, 1.0f,
+				-1.4, 0.9f, -1.0f, //estas son las coordenadas
+				0.1f, 0.1f, 0.0f);
+			pointLightCount++;
+
+			pointLights[4] = PointLight(0.0f, 0.0f, 1.0f,
+				1.0f, 1.0f,
+				2.9f, 0.9f, -1.0f, //estas son las coordenadas
+				0.1f, 0.1f, 0.0f);
+			pointLightCount++;
+
+		}
+
+
 
 		/********************************APAGAR LUCES SPOTLIGHT********************************/
 
@@ -474,17 +511,16 @@ int main()
 		}
 		else if (apagarP1 == 2)
 		{ 
-			distanca_Luz1P = -80.5f;
+			distanca_Luz1P = 9.5f;
 		}
 		
 		if (apagarP2 == 1) {
-			distancia_Luz2P = -50.0f;
+			distancia_Luz2P = -80.0f;
 		}
 		else if (apagarP2 == 2)
 		{
-			distancia_Luz2P = -10.5f;
+			distancia_Luz2P = -1.5f;
 		}
-
 
 		
 
@@ -496,6 +532,7 @@ int main()
 		//dia
 		if (hora >= 0.0 && hora <= 8.0) {
 			skybox.DrawSkybox(camera.calculateViewMatrix(), projection);
+			luces_entrada = 0;
 		}
 		//amanecer o atardecer
 		else if ((hora > 8.0 && hora <= 10.0) || (hora > 21.0 && hora <= 24.0)) {
@@ -504,6 +541,7 @@ int main()
 		//noche
 		else if (hora > 10.0 && hora <= 21.0) {
 			skybox3.DrawSkybox(camera.calculateViewMatrix(), projection);
+			luces_entrada = 1;
 		}
 
 		//movimiento del kilauea
@@ -518,6 +556,10 @@ int main()
 			}
 		}
 		else { altitud = 0.0f; }
+
+		//movimiento noria
+		giro += 0.1f;
+		if (giro >= 360) { giro = 0.0f; }
 
 
 		shaderList[0].UseShader();
@@ -558,9 +600,16 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
-
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(2.7f, -2.0f, -1.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		street_Lamp.RenderModel();
+
+		//Luminaria dentro de la feria
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(9.5f, -2.0f, -23.0f));
 		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
@@ -573,6 +622,13 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		street_Lamp.RenderModel();
 
+		//Luminaria baño
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(12.0f, -1.95f, -2.5f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		street_Lamp.RenderModel();
 
 		/******************************************************* JUEGOS MECANICOS *********************************************************************************/
 		model = glm::mat4(1.0);
@@ -580,7 +636,20 @@ int main()
 		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Noria.RenderModel();
+		BaseNoria.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, 6.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+		model = glm::rotate(model, giro * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		RuedaNoria.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
+		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
@@ -1080,6 +1149,21 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Bath.RenderModel();
+		/*******************************Para los triggers***********************/
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(9.0f, -2.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Mesa.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(9.0f, -2.0f, -10.0f));
+		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Duck.RenderModel();
 
 
 		mainWindow.swapBuffers();
