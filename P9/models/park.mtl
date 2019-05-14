@@ -1,0 +1,52 @@
+newmtl lambert2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd gray.tga
+Ni 1.00
+newmtl park:Material
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd gray.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl park:Material_002
+illum 4
+Kd 0.00 0.00 0.00
+Ka 1.00 1.00 1.00
+Tf 1.00 1.00 1.00
+map_Kd yellow.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl park:Material_003
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd red.tga
+Ni 1.00
+Ks 0.38 0.38 0.38
+Ns 96.08
+newmtl phong1SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd red.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl phong2SG
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd gray.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00

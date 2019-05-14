@@ -1,20 +1,13 @@
-﻿  Shader_light.cpp
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\shader_light.cpp(202): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\shader_light.cpp(201): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\shader_light.cpp(215): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\shader_light.cpp(214): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\shader_light.cpp(213): warning C4244: 'argumento': conversión de 'GLuint' a 'GLfloat'; posible pérdida de datos
-  Skybox.cpp
-  Texture.cpp
-  practica10_alumno.cpp
+﻿  practica10_alumno.cpp
 c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
 c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(378): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(396): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(479): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(398): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(418): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(501): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1239): warning C4305: '+=': truncamiento de 'double' a 'float'
   Generando código
-  132 of 1076 functions (12.3%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+  1 of 1085 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   P9.vcxproj -> C:\Users\Elda\Desktop\PROYECTO_FINAL_COMPU_GRAFICA\ProyectoFinalCGeIHC\Release\P9.exe

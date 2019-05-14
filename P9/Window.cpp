@@ -3,7 +3,7 @@
 extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
 extern GLfloat upX, upY, upZ;
-extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2;
+extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo;
 
 Window::Window()
 {
@@ -193,7 +193,11 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		apagarP2 = 2;
 	}
 
-
+	/*************************Para el globo, triggers**********************/
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS)
+	{
+		globo = 1;
+	}
 
 	if (key >= 0 && key < 1024)
 	{

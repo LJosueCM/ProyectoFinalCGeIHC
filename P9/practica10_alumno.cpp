@@ -76,6 +76,7 @@ Model BaseTree;
 Model Hojas;
 Model Tree;
 Model Globos;
+Model Globo;
 Model HotDog;
 Model Coke;
 Model Cotton;
@@ -88,6 +89,9 @@ Model CabinaNoria;
 Model Pan;
 Model Duck;
 Model Mesa;
+Model Park;
+Model Ice_Cream;
+Model PopCorn;
 
 Skybox skybox;
 Skybox skybox2;
@@ -99,8 +103,9 @@ GLfloat lastTime = 0.0f;
 int cont = 0;
 float hora = 0.0;
 int camara1 = 1, camara2 = 0;
-int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0;
-float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f ;
+float mov_x_pato = 0, mov_y_pato = 0;
+int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0;
+float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0 ;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -326,9 +331,24 @@ int main()
 	Mesa = Model();
 	Mesa.LoadModel("Models/mesa.obj");
 
+	//globo
+	Globo = Model();
+	Globo.LoadModel("Models/globo_1.obj");
 
 	Duck = Model();
 	Duck.LoadModel("Models/10602_Rubber_Duck_v1_L3.obj");
+
+	//Parque
+	Park = Model();
+	Park.LoadModel("Models/park.obj");
+
+	//Helado
+	Ice_Cream = Model();
+	Ice_Cream.LoadModel("Models/helado.obj");
+
+	//Palomitas chidas
+	PopCorn = Model();
+	PopCorn.LoadModel("Models/Puesto_palomitas.obj");
 
 	//luz direccional, sólo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
@@ -385,6 +405,8 @@ int main()
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
+
+	
 
 		//contador para cambiar de hora cada cierto tiempo
 		//de esta forma cambiamos el skybox de acuerdo a la hora del dia.
@@ -473,16 +495,16 @@ int main()
 
 		if(luces_entrada == 1)
 		{ 
-			pointLights[3] = PointLight(0.0f, 0.0f, 1.0f,
+			pointLights[3] = PointLight(0.0f, 0.0f, 0.0f,
 				1.0f, 1.0f,
 				-1.4, 0.9f, -1.0f, //estas son las coordenadas
-				0.1f, 0.1f, 0.0f);
+				0.1f, 0.1f, 0.1f);
 			pointLightCount++;
 
-			pointLights[4] = PointLight(0.0f, 0.0f, 1.0f,
+			pointLights[4] = PointLight(0.0f, 0.0f, 0.0f,
 				1.0f, 1.0f,
 				2.9f, 0.9f, -1.0f, //estas son las coordenadas
-				0.1f, 0.1f, 0.0f);
+				0.1f, 0.1f, 0.1f);
 			pointLightCount++;
 
 		}
@@ -667,6 +689,35 @@ int main()
 		base_kilahuea.RenderModel();
 
 		/***************************************************************** ELEMENTOS EXTRA **************************************************************************/
+		
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.0f, -2.0f, -17.5f));
+		model = glm::scale(model, glm::vec3(0.18f, 0.18f, 0.18f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		PopCorn.RenderModel();
+
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.0f, -2.0f, -15.5f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Ice_Cream.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(10.0f, -2.0f, -16.5f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Mesa.RenderModel();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(7.0f, -2.0f, -3.5f));
+		model = glm::scale(model, glm::vec3(2.5f,2.5f, 2.5f));	
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Park.RenderModel();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -19.0f));
@@ -1141,29 +1192,110 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		stone.RenderModel();
 
+		//Camino al baño 
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(2.7f, -2.05f, -11.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		stone.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(5.4f, -2.05f, -11.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		stone.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(8.1f, -2.05f, -11.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		stone.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(10.8f, -2.05f, -11.0f));
+		model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		stone.RenderModel();
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.1f, -2.05f, -11.0f));
+		model = glm::scale(model, glm::vec3(0.25f, 0.3f, 0.3f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		stone.RenderModel();
+
 		//baño 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(13.0f, -1.95f, -2.5f));
+		model = glm::translate(model, glm::vec3(13.0f, -1.95f, -8.5f));
 		model = glm::scale(model, glm::vec3(0.006f, 0.006f, 0.006f));
-		model = glm::rotate(model, 180 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::rotate(model,- 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Bath.RenderModel();
-		/*******************************Para los triggers***********************/
+
+		/*******************Los triggers del globo          ********************/
+
+		if (globo == 1) {
+			aumenta_globo += 0.01;
+			
+	
+		}
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.45f, 0.5 + aumenta_globo, -9.0f));
+		model = glm::scale(model, glm::vec3(10.0f,10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_globo == 0) {
+			Globo.RenderModel();
+		}
+		
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(13.45f, 0.5 + (aumenta_globo + 0.05), -8.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_globo == 0) {
+			Globo.RenderModel();
+		}
+
+
+		
+
+
+		
+
+
+		/*******************************Para los triggers de teoria************
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(9.0f, -2.0f, -10.0f));
-		model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Mesa.RenderModel();
 
+		/*****************Parte del trigger en pato*********/
+
+		/*v_x_pato += 0.001;
+		mov_y_pato += 0.001;
+
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(9.0f, -2.0f, -10.0f));
-		model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
+		model = glm::translate(model, glm::vec3(9.0f + mov_x_pato, -1.0f + mov_y_pato, -10.0f));
+		model = glm::rotate(model, 90  * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Duck.RenderModel();
+
+		printf("Movimiento pato: %f", mov_x_pato);
+
+		if (mov_y_pato == 1.0f){
+			printf("Soy igual a 1");
+			
+
+		}*/
 
 
 		mainWindow.swapBuffers();
