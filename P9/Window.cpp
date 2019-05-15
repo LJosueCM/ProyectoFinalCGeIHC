@@ -2,8 +2,8 @@
 
 extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
-extern GLfloat upX, upY, upZ;
-extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo;
+extern GLfloat upX, upY, upZ, posx, posy,posz;
+extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata;
 
 Window::Window()
 {
@@ -125,6 +125,9 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		printf("UpX: %f\n", upX);
 		printf("UpY: %f\n", upY);
 		printf("UpZ: %f\n", upZ);
+		printf("lataX: %f\n", posx);
+		printf("latay: %f\n", posy);
+		printf("lataz: %f\n", posz);
 
 
 	}
@@ -198,6 +201,41 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		globo = 1;
 	}
+	/**************************Para el refresco, triggers*******************************************/
+	if (key == GLFW_KEY_X && action == GLFW_PRESS)
+	{
+		lata = 1;
+	}
+	/***********Teclas auxiliares*************/
+	if (key == GLFW_KEY_T && action == GLFW_PRESS)
+	{
+		posx += 0.1;
+	}
+	if (key == GLFW_KEY_G && action == GLFW_PRESS)
+	{
+		posy += 0.1;
+	}
+	if (key == GLFW_KEY_B && action == GLFW_PRESS)
+	{
+		posz += 0.1;
+	}
+	if (key == GLFW_KEY_R && action == GLFW_PRESS)
+	{
+		posx -= 0.1;
+	}
+	if (key == GLFW_KEY_F && action == GLFW_PRESS)
+	{
+		posy -= 0.1;
+	}
+	if (key == GLFW_KEY_V && action == GLFW_PRESS)
+	{
+		posz -= 0.1;
+	}
+
+	
+
+
+
 
 	if (key >= 0 && key < 1024)
 	{

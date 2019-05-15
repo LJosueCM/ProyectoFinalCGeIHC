@@ -79,6 +79,7 @@ Model Globos;
 Model Globo;
 Model HotDog;
 Model Coke;
+Model Can;
 Model Cotton;
 Model Corn;
 Model Kilahuea;
@@ -104,8 +105,8 @@ int cont = 0;
 float hora = 0.0;
 int camara1 = 1, camara2 = 0;
 float mov_x_pato = 0, mov_y_pato = 0;
-int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0;
-float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0 ;
+int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0, lata = 0, contador_lata = 0, trigger_coca = 0;
+float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0, mover_lata_x = 0, posx = 0, posy = 0, posz = 0;
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -312,6 +313,8 @@ int main()
 	//Maquina de refrescos
 	Coke = Model();
 	Coke.LoadModel("Models/coke.obj");
+	Can = Model();
+	Can.LoadModel("Models/lata.obj");
 
 	//arbol
 	BaseTree = Model();
@@ -713,6 +716,13 @@ int main()
 		Mesa.RenderModel();
 
 		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(6.0f, -2.0f, -16.5f));
+		model = glm::scale(model, glm::vec3(0.32f, 0.32f, 0.32f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Mesa.RenderModel();
+
+		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(7.0f, -2.0f, -3.5f));
 		model = glm::scale(model, glm::vec3(2.5f,2.5f, 2.5f));	
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -733,14 +743,6 @@ int main()
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		HotDog.RenderModel();
-
-		model = glm::mat4(1.0);
-		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::translate(model, glm::vec3(15.2f, -2.0f, -12.5f));
-		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Coke.RenderModel();
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-4.7f, -2.0f, -19.0f));
@@ -1233,12 +1235,18 @@ int main()
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		Bath.RenderModel();
 
-		/*******************Los triggers del globo          ********************/
+		/*******************     Los triggers del globo          ********************/
 
 		if (globo == 1) {
 			aumenta_globo += 0.01;
-			
-	
+			if (aumenta_globo > 19.0)
+			{
+				printf("mayor a 5, valor de aumenta globo: %f", aumenta_globo);
+				trigger_globo = 1;
+				aumenta_globo = 0;
+				printf("\nvalor del trigger %d:", trigger_globo);
+
+			}
 		}
 
 		model = glm::mat4(1.0);
@@ -1249,7 +1257,15 @@ int main()
 		if (trigger_globo == 0) {
 			Globo.RenderModel();
 		}
-		
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-9.8f, -0.1 + aumenta_globo, -19.0f));
+		model = glm::scale(model, glm::vec3(13.0f, 12.0f, 12.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_globo == 0) {
+			Globo.RenderModel();
+		}
 
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(13.45f, 0.5 + (aumenta_globo + 0.05), -8.0f));
@@ -1259,11 +1275,42 @@ int main()
 		if (trigger_globo == 0) {
 			Globo.RenderModel();
 		}
+		/***************************** Los triggers del refresco **************************************/
 
+		if (lata == 1) { //se moveria en el eje 
+			mover_lata_x += 0.05;
+			if (mover_lata_x > 0.3)
+			{	
+				mover_lata_x = -0.3;
+				contador_lata += 1;
+				if(contador_lata == 3){
+					mover_lata_x = 0;
+					trigger_coca = 1;
+					lata = 0;
+					printf("Valor de lata %d",lata);
+				}
+				
+			}
 
-		
+		}
 
+		model = glm::mat4(1.0);
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(15.2f + mover_lata_x, -2.0f, -12.5f));
+		model = glm::scale(model, glm::vec3(0.35f, 0.35f, 0.35f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		Coke.RenderModel();
 
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-12.1f, -1.6f, -15.3f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_coca == 1) {
+			Can.RenderModel();
+		}
 		
 
 
