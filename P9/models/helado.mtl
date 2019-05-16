@@ -1,11 +1,3 @@
-newmtl _Snow_Cone_Vending_Cart_v3_l2:Glass1
-illum 4
-Kd 0.59 0.59 0.59
-Ka 0.59 0.59 0.59
-Tf 0.19 0.19 0.19
-Ni 1.50
-Ks 0.32 0.32 0.32
-Ns 32.00
 newmtl _Snow_Cone_Vending_Cart_v3_l2:_Paint
 illum 4
 Kd 0.00 0.00 0.00
@@ -29,6 +21,41 @@ illum 4
 Kd 0.00 0.00 0.00
 Ka 0.00 0.00 0.00
 Tf 1.00 1.00 1.00
+map_Kd metal.tga
 Ni 1.50
 Ks 0.00 0.00 0.00
 Ns 41.00
+newmtl pasted__pasted__pasted__anisotropic4SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd black.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__pasted__pasted__pasted__anisotropic4SG2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd black.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+newmtl pasted__pasted__pasted__phong5SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd gray.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00
+newmtl pasted__pasted__phong5SG1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd gray.tga
+Ni 1.00
+Ks 0.50 0.50 0.50
+Ns 18.00

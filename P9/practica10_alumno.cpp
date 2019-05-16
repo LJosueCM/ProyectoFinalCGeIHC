@@ -32,22 +32,18 @@
 using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
-bool avanza, sube = 1, kilauea = 0;
+bool avanza, sube = 1, kilauea = 0, noria=0;
 float altitud = 0.0f, giro = 0.0f;
 Window mainWindow;
 std::vector<Mesh*> meshList;
 std::vector<Shader> shaderList;
 Camera camera;
 
+float reproduciranimacion, habilitaranimacion, guardoFrame, reinicioFrame, ciclo, ciclo2, contador = 0;
 
-
-Texture brickTexture;
-Texture dirtTexture;
 Texture plainTexture;
-Texture dadoTexture;
 Texture pisoTexture;
-Texture Tagave;
-Texture Hojas1;
+Texture Amarillo;
 //materiales
 Material Material_brillante;
 Material Material_opaco;
@@ -59,13 +55,8 @@ DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
 SpotLight spotLights[MAX_SPOT_LIGHTS];
 
-Model Kitt_M;
-Model Llanta_M;
-Model Camino_M;
-Model Blackhawk_M;
 Model street_Lamp;
 Model Iron_door;
-Model road;
 Model wall;
 Model tree;
 Model stone;
@@ -107,6 +98,11 @@ int camara1 = 1, camara2 = 0;
 float mov_x_pato = 0, mov_y_pato = 0;
 int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0, lata = 0, contador_lata = 0, trigger_coca = 0;
 float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0, mover_lata_x = 0, posx = 0, posy = 0, posz = 0;
+
+static double limitFPS = 1.0 / 60.0;
+
+//void my_input(GLFWwindow *window);
+void inputKeyframes(bool* keys);
 
 // Vertex Shader
 static const char* vShader = "shaders/shader_light.vert";
@@ -223,6 +219,87 @@ void CreateShaders()
 	shaderList.push_back(*shader1);
 }
 
+bool animacion = false;
+
+//NEW// Keyframes
+float posYbase = -2.0;
+float posXbase = -7.5;
+float posZbase = -29.0;
+float	movbase_y = 0.0f;
+
+#define MAX_FRAMES 9
+int i_max_steps = 90;
+int i_curr_steps = 5;
+typedef struct _frame
+{
+	//Variables para GUARDAR Key Frames
+	float movbase_y;		//Variable para PosicionY
+	float movbase_yInc;		//Variable para IncrementoY
+}FRAME;
+
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 5;			//introducir datos
+bool play = false;
+int playIndex = 0;
+
+void saveFrame(void)
+{
+
+	printf("frameindex %d\n", FrameIndex);
+
+	KeyFrame[FrameIndex].movbase_y = movbase_y;
+
+	FrameIndex++;
+}
+
+void resetElements(void)
+{
+	movbase_y = KeyFrame[0].movbase_y;
+}
+
+void interpolation(void)
+{
+	KeyFrame[playIndex].movbase_yInc = (KeyFrame[playIndex + 1].movbase_y - KeyFrame[playIndex].movbase_y) / i_max_steps;
+
+}
+
+
+void animate(void)
+{
+	//Movimiento del objeto
+	if (play)
+	{
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			printf("playindex : %d\n", playIndex);
+			if (playIndex > FrameIndex - 2)	//end of total animation?
+			{
+				printf("Frame index= %d\n", FrameIndex);
+				printf("termina anim\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				//printf("entro aquí\n");
+				i_curr_steps = 0; //Reset counter
+				//Interpolation
+				interpolation();
+			}
+		}
+		else
+		{
+			//printf("se quedó aqui\n");
+			//printf("max steps: %f", i_max_steps);
+			//Draw animation
+			movbase_y += KeyFrame[playIndex].movbase_yInc;
+			i_curr_steps++;
+		}
+
+	}
+}
+
 int main()
 {
 	mainWindow = Window(1366, 768); // 1280, 1024 or 1024, 768
@@ -240,23 +317,33 @@ int main()
 
 	/*************************************SONIDO MP3 *****************************************/
 
-	engine->play2D("Audio/lon-lon-ranch.mp3", true);
+	ISound* ambiental=engine->play2D("Audio/lon-lon-ranch.mp3", true);
+	if(ambiental)
+		ambiental->setVolume(1);
+	ISound* track3D=engine->play3D("Audio/gritos.wav", vec3df(0,0,0),true,false,true);
+	if (track3D) {
+		track3D->setMinDistance(5.0f);
+		track3D->setVolume(1000);
+	}
 
+	ISound* track3D2 = engine->play3D("Audio/cash.wav", vec3df(0, 0, 0), true, false, true);
+	if (track3D2) {
+		track3D2->setMinDistance(2.0f);
+		track3D2->setVolume(1000);
+	}
+
+	ISound* track3D3 = engine->play3D("Audio/cash.wav", vec3df(0, 0, 0), true, false, true);
+	if (track3D3) {
+		track3D3->setMinDistance(2.0f);
+		track3D3->setVolume(1000);
+	}
 
 	plainTexture = Texture("Textures/pasto.png");
 	plainTexture.LoadTextureA();
-	Hojas1 = Texture("Textures/leafs1.tga");
-	Hojas1.LoadTextureA();
+	Amarillo=Texture("Textures/yellow.tga");
+	Amarillo.LoadTexture();
 	Material_brillante = Material(4.0f, 256);
 	Material_opaco = Material(0.3f, 4);
-	Kitt_M = Model();
-	Kitt_M.LoadModel("Models/kitt.3ds");
-	Llanta_M = Model();
-	Llanta_M.LoadModel("Models/k_rueda.3ds");
-	Blackhawk_M = Model();
-	Blackhawk_M.LoadModel("Models/uh60.obj");
-	Camino_M = Model();
-	Camino_M.LoadModel("Models/railroad track.obj");
 
 	//LUMINARIA
 	street_Lamp = Model();
@@ -271,14 +358,8 @@ int main()
 	tree.LoadModel("Models/tree4a_lod1.obj");
 
 	//Carretaera
-	road = Model();
-	road.LoadModel("Models/road.obj");
 	wall = Model();
 	wall.LoadModel("Models/wall.obj");
-
-	//Kart
-	Kart = Model();
-	Kart.LoadModel("Models/kart.obj");
 
 	//noria
 	BaseNoria = Model();
@@ -286,7 +367,7 @@ int main()
 	RuedaNoria = Model();
 	RuedaNoria.LoadModel("Models/rueda.obj");
 	CabinaNoria = Model();
-	CabinaNoria.LoadModel("Models/cabinas.obj");
+	CabinaNoria.LoadModel("Models/cabine.obj");
 
 	//Kilahue
 	Kilahuea = Model();
@@ -358,7 +439,7 @@ int main()
 		0.3f, 0.3f,
 		0.0f, 0.0f, -1.0f);
 
-
+	glm::vec3 posbase = glm::vec3(-7.5f, -2.0f, -29.0f);
 
 	//skybox para dia
 	std::vector<std::string> skyboxFaces;
@@ -395,9 +476,24 @@ int main()
 	movOffset = 1.0f;
 	avanza = 1;
 
+	KeyFrame[0].movbase_y = 0.0f;
+
+	KeyFrame[1].movbase_y = 16.0f;
+
+	KeyFrame[2].movbase_y = 12.0f;
+
+	KeyFrame[3].movbase_y = 16.0f;
+
+	KeyFrame[4].movbase_y = 0.0f;
+
 	//Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
 	{
+		engine->setListenerPosition(vec3df(camera.getCameraPosition()[0], camera.getCameraPosition()[1], camera.getCameraPosition()[2]), vec3df(0, 0, 1));
+		track3D->setPosition(vec3df(-7, posYbase + movbase_y, -29));
+		track3D2->setPosition(vec3df(-8, -2, -19));
+		track3D3->setPosition(vec3df(16, -2, -12));
+
 		GLfloat now = glfwGetTime();
 		deltaTime = now - lastTime;
 		lastTime = now;
@@ -408,7 +504,6 @@ int main()
 
 		//Recibir eventos del usuario
 		glfwPollEvents();
-
 	
 
 		//contador para cambiar de hora cada cierto tiempo
@@ -548,7 +643,8 @@ int main()
 		}
 
 		
-
+		inputKeyframes(mainWindow.getsKeys());
+		animate();
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -569,22 +665,26 @@ int main()
 			luces_entrada = 1;
 		}
 
-		//movimiento del kilauea
-		if (kilauea == 1) {
-			if (sube == 1) {
-				altitud += 0.05f;
-				if (altitud >= 16.0f) { sube = 0; }
-			}
-			else {
-				altitud -= 0.05f;
-				if (altitud <= 0.0f) { sube = 1; }
-			}
-		}
-		else { altitud = 0.0f; }
+		////movimiento del kilauea
+		//if (kilauea == 1) {
+		//	if (sube == 1) {
+		//		altitud += 0.1f;
+		//		if (altitud >= 16.0f) { sube = 0; }
+		//	}
+		//	else {
+		//		altitud -= 0.2f;
+		//		if (altitud <= 0.0f) { sube = 1; }
+		//	}
+		//}
+		//else { altitud = 0.0f; }
 
 		//movimiento noria
-		giro += 0.1f;
-		if (giro >= 360) { giro = 0.0f; }
+		if (noria == 1) {
+			giro += 0.2f;
+			if (giro >= 360) { giro = 0.0f; }
+		}
+		else { giro = 0.0f; }
+		
 
 
 		shaderList[0].UseShader();
@@ -608,6 +708,8 @@ int main()
 		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 
 		glm::mat4 model(1.0);
+		glm::mat4 modelBaseNoria(1.0);
+		glm::mat4 modelBaseNoria2(1.0);
 
 		//Piso Pasto
 		model = glm::mat4(1.0);
@@ -657,25 +759,110 @@ int main()
 
 		/******************************************************* JUEGOS MECANICOS *********************************************************************************/
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
+		modelBaseNoria=model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
 		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		BaseNoria.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, 6.0f, -8.0f));
+
+		modelBaseNoria2=model= glm::translate(modelBaseNoria, glm::vec3(0.0f, 8.25f, 0.0f));
+		model = glm::rotate(modelBaseNoria2, giro * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
-		model = glm::rotate(model, giro * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		RuedaNoria.RenderModel();
-		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-10.0f, -2.0f, -8.0f));
-		model = glm::scale(model, glm::vec3(1.1f, 1.1f, 1.1f));
+		
+		model = glm::rotate(modelBaseNoria2, (giro+17) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro+17) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		CabinaNoria.RenderModel();
 
+		model = glm::rotate(modelBaseNoria2, (giro + 53) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 53) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 90) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 90) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 126) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 126) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 162) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 162) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 198) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 198) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 234) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 234) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 270) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 270) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 307) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 307) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		model = glm::rotate(modelBaseNoria2, (giro + 343) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::translate(model, glm::vec3(0.0f, 4.72f, 0.0f));
+		model = glm::rotate(model, -(giro + 343) * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::rotate(model, 90 * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		CabinaNoria.RenderModel();
+
+		//////////////////////////kilauea///////////////////////////////////////
 		model = glm::mat4(1.0);
 		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
 		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
@@ -684,8 +871,10 @@ int main()
 		Kilahuea.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
-		model = glm::translate(model, glm::vec3(0.0f, altitud, 0.0f));
+		//model = glm::translate(model, glm::vec3(-7.5f, -2.0f, -29.0f));
+		posbase = glm::vec3(posXbase, posYbase + movbase_y, posZbase);
+		model = glm::translate(model, posbase);
+		//model = glm::translate(model, glm::vec3(0.0f, altitud, 0.0f));
 		model = glm::scale(model, glm::vec3(0.9f, 0.9f, 0.9f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
@@ -1253,6 +1442,7 @@ int main()
 		model = glm::translate(model, glm::vec3(13.45f, 0.5 + aumenta_globo, -9.0f));
 		model = glm::scale(model, glm::vec3(10.0f,10.0f, 10.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
 			Globo.RenderModel();
@@ -1262,6 +1452,7 @@ int main()
 		model = glm::translate(model, glm::vec3(-9.8f, -0.1 + aumenta_globo, -19.0f));
 		model = glm::scale(model, glm::vec3(13.0f, 12.0f, 12.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
 			Globo.RenderModel();
@@ -1271,6 +1462,7 @@ int main()
 		model = glm::translate(model, glm::vec3(13.45f, 0.5 + (aumenta_globo + 0.05), -8.0f));
 		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
 			Globo.RenderModel();
@@ -1350,4 +1542,54 @@ int main()
 
 	engine->drop();
 	return 0;
+}
+
+void inputKeyframes(bool* keys)
+{
+	if (keys[GLFW_KEY_1])
+	{
+		if (reproduciranimacion < 1)
+		{
+			if (play == false && (FrameIndex > 1))
+			{
+				resetElements();
+				//First Interpolation				
+				interpolation();
+				play = true;
+				playIndex = 0;
+				i_curr_steps = 0;
+				reproduciranimacion++;
+				printf("presiona 0 para habilitar reproducir de nuevo la animación'\n");
+				habilitaranimacion = 0;
+
+			}
+			else
+			{
+				play = false;
+			}
+		}
+	}
+	if (keys[GLFW_KEY_0])
+	{
+		if (habilitaranimacion < 1)
+		{
+			reproduciranimacion = 0;
+		}
+	}
+
+	if (keys[GLFW_KEY_P])
+	{
+		if (reinicioFrame < 1)
+		{
+			guardoFrame = 0;
+		}
+	}
+	
+	if (keys[GLFW_KEY_2])
+	{
+		if (ciclo2 < 1)
+		{
+			ciclo = 0;
+		}
+	}
 }

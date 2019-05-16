@@ -2,7 +2,8 @@
 
 extern GLfloat posX = 0, posY = 0, posZ = 0;
 extern GLfloat frontX = 0, frontY = 0, frontZ = 0;
-extern GLfloat upX = 0, upY = 0, upZ = 0;
+extern GLfloat upX = 0, upY = 0, upZ = 0, lastposX = 0, lastposY = 0, LastposZ = 0;
+extern GLfloat lastFrontx = 0, lastFronty = 0, lastFrontz = 0, lastUpx = 0, lastUpy = 0, lastUpz = 0;
 
 
 Camera::Camera() {}
@@ -21,9 +22,15 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 	update();
 }
 
+//Camara Libre
 void Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
+	
+	//Almaceno los valores
+	position[0] = lastposX;
+	position[1] = lastposY;
+	position[2] = LastposZ;
 
 	if (keys[GLFW_KEY_W])
 	{
@@ -44,15 +51,30 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 	{
 		position += right * velocity;
 	}
+
+	//Reasignacion 
+	lastposX = position[0];
+	lastposY = position[1];
+	LastposZ = position[2];
+
+
 }
 
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 {
+	front[0] = lastFrontx;
+	front[1] = lastFronty;
+	front[2] = lastFrontz;
+	up[0] = lastUpx;
+	up[1] = lastUpy;
+	up[2] = lastUpz;
+
 	xChange *= turnSpeed;
 	yChange *= turnSpeed;
 
 	yaw += xChange;
 	pitch += yChange;
+
 
 	if (pitch > 89.0f)
 	{
@@ -64,9 +86,15 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 		pitch = -89.0f;
 	}
 
+	lastFrontx = front[0] ;
+	lastFronty = front[1] ;
+	lastFrontz = front[2] ;
+	lastUpx = up[0] ;
+	lastUpy = up[1] ;
+	lastUpz = up[2] ;
+
 	update();
 }
-
 
 
 //Camara aerea
@@ -97,9 +125,6 @@ void Camera::keyControlAerea(bool* keys, GLfloat deltaTime)
 		position[2] += right[2] * velocity*6.0;
 	}
 }
-
-
-
 
 void Camera::mouseControlAerea(GLfloat xChange, GLfloat yChange)
 {
