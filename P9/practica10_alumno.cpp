@@ -67,7 +67,8 @@ Model BaseTree;
 Model Hojas;
 Model Tree;
 Model Globos;
-Model Globo;
+Model Globo_A;
+Model Globo_B;
 Model HotDog;
 Model Coke;
 Model Can;
@@ -94,7 +95,7 @@ GLfloat lastTime = 0.0f;
 
 int cont = 0;
 float hora = 0.0;
-int camara1 = 1, camara2 = 0;
+int camara1 = 1, camara2 = 0, camaraNoria = 0;
 float mov_x_pato = 0, mov_y_pato = 0;
 int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0, lata = 0, contador_lata = 0, trigger_coca = 0;
 float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0, mover_lata_x = 0, posx = 0, posy = 0, posz = 0;
@@ -416,8 +417,10 @@ int main()
 	Mesa.LoadModel("Models/mesa.obj");
 
 	//globo
-	Globo = Model();
-	Globo.LoadModel("Models/globo_1.obj");
+	Globo_A = Model();
+	Globo_A.LoadModel("Models/globo_azul.obj");
+	Globo_B = Model();
+	Globo_B.LoadModel("Models/globo_amarillo.obj");
 
 	Duck = Model();
 	Duck.LoadModel("Models/10602_Rubber_Duck_v1_L3.obj");
@@ -519,24 +522,26 @@ int main()
 			}
 		}
 
-
 		//Camara libre :v
-		if (camara1 == 1)
+		if (camara1 == 1 && camara2 ==0)
 		{
 			camera.keyControl(mainWindow.getsKeys(), deltaTime);
 			camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 		}
-		else if (camara2 == 1)
+		else if (camara2 == 1 && camara1 ==0)
 		{
 
 
 			camera.keyControlAerea(mainWindow.getsKeys(), deltaTime);
 			camera.mouseControlAerea(0, 0);
-
 		}
+		else if (camaraNoria == 1)
+		{
 
-
-
+			camera.keyControlNoria(mainWindow.getsKeys(), deltaTime);
+			camera.mouseControlNoria(0, 0);
+		}
+		
 
 		/****************************************** LUCES SPOTLIGHT**********************************************/
 
@@ -1445,7 +1450,7 @@ int main()
 		Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
-			Globo.RenderModel();
+			Globo_A.RenderModel();
 		}
 
 		model = glm::mat4(1.0);
@@ -1455,7 +1460,7 @@ int main()
 		//Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
-			Globo.RenderModel();
+			Globo_A.RenderModel();
 		}
 
 		model = glm::mat4(1.0);
@@ -1465,8 +1470,33 @@ int main()
 		//Amarillo.UseTexture();
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		if (trigger_globo == 0) {
-			Globo.RenderModel();
+			Globo_B.RenderModel();
 		}
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(12.5f, 0.5 + (aumenta_globo + 0.05), -8.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//Amarillo.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_globo == 0) {
+			Globo_A.RenderModel();
+		}
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(12.5f, 0.5 + (aumenta_globo + 0.05), -9.0f));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//Amarillo.UseTexture();
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (trigger_globo == 0) {
+			Globo_B.RenderModel();
+		}
+
+
+
+
+
 		/***************************** Los triggers del refresco **************************************/
 
 		if (lata == 1) { //se moveria en el eje 

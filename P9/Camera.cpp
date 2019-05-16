@@ -95,14 +95,14 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 
 	update();
 }
-
+//aqui termina
 
 //Camara aerea
 void Camera::keyControlAerea(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
 
-	position[1] = 35.324623;
+	position[1] = 35.324623; //valor de y
 
 
 	if (keys[GLFW_KEY_D])
@@ -158,6 +158,71 @@ void Camera::mouseControlAerea(GLfloat xChange, GLfloat yChange)
 	up = glm::normalize(glm::cross(right,front));
 
 }
+
+//Camara para la noria
+
+void Camera::keyControlNoria(bool* keys, GLfloat deltaTime)
+{
+	GLfloat velocity = moveSpeed * deltaTime;
+
+	position[0] = 3.34335;
+	position[1] = 5.077526;
+	position[2] = -8.5496;
+
+	if (keys[GLFW_KEY_D])
+	{
+		position[0] += front[1] * velocity;
+	}
+
+	if (keys[GLFW_KEY_A])
+	{
+		position[0] -= front[1] * velocity;
+	}
+
+	if (keys[GLFW_KEY_S])
+	{
+		position[2] -= right[2] * velocity*6.0;
+	}
+
+	if (keys[GLFW_KEY_W])
+	{
+		position[2] += right[2] * velocity*6.0;
+	}
+}
+
+void Camera::mouseControlNoria(GLfloat xChange, GLfloat yChange)
+{
+	xChange *= turnSpeed;
+	yChange *= turnSpeed;
+
+	yaw += xChange;
+	pitch += yChange;
+
+	front[0] = -0.997412;
+	front[1] = -0.17452;
+	front[2] = -0.069746;
+
+	up[0] = -0.017410;
+	up[1] = 2.0;
+	up[2] = -0.001217;
+
+
+	if (pitch > 89.0f)
+	{
+		pitch = 89.0f;
+	}
+
+	if (pitch < -89.0f)
+	{
+		pitch = -89.0f;
+	}
+
+	front = glm::normalize(front);
+	right = glm::normalize(glm::cross(front, worldUp));
+	up = glm::normalize(glm::cross(right, front));
+
+}
+//Hasta aqui termina
 
 glm::mat4 Camera::calculateViewMatrix()
 {

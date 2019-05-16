@@ -3,7 +3,7 @@
 extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
 extern GLfloat upX, upY, upZ, posx, posy,posz;
-extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata;
+extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata ,camaraNoria;
 
 Window::Window()
 {
@@ -40,7 +40,7 @@ int Window::Initialise()
 	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 	//CREAR VENTANA
-	mainWindow = glfwCreateWindow(width, height, "Proyecto Final :) para Roque0", NULL, NULL);
+	mainWindow = glfwCreateWindow(width, height, "Proyecto Final muy chido :) ", NULL, NULL);
 
 	if (!mainWindow)
 	{
@@ -137,6 +137,7 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		camara2 = 1;
 		camara1 = 0;
+		camaraNoria = 0;
 
 	}
 
@@ -144,8 +145,30 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		camara1 = 1;
 		camara2 = 0;
+		camaraNoria = 0;
 
 	}
+
+	/*************************Para camara de la noria ***************************************/
+	if (key == GLFW_KEY_V && action == GLFW_PRESS)
+	{
+		camaraNoria = 1; //camara noria encendida
+		camara1 = 0; //camara normal apagada
+		camara2 = 0; //camara dos es la aerea y apagada
+
+	}
+
+	if (key == GLFW_KEY_B && action == GLFW_PRESS)
+	{
+		camaraNoria = 0; //camara de Noria apagada
+		camara1 = 1; //camara normal encendida
+		camara2 = 0; //camara aerea apagada
+
+
+	}
+
+
+
 	/*************************Para luces tipo spotlight **********************************************/
 	if (key == GLFW_KEY_O && action == GLFW_PRESS)
 	{
@@ -213,35 +236,6 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		lata = 1;
 	}
-	/***********Teclas auxiliares*************/
-	if (key == GLFW_KEY_T && action == GLFW_PRESS)
-	{
-		posx += 0.1;
-	}
-	if (key == GLFW_KEY_G && action == GLFW_PRESS)
-	{
-		posy += 0.1;
-	}
-	if (key == GLFW_KEY_B && action == GLFW_PRESS)
-	{
-		posz += 0.1;
-	}
-	if (key == GLFW_KEY_R && action == GLFW_PRESS)
-	{
-		posx -= 0.1;
-	}
-	if (key == GLFW_KEY_F && action == GLFW_PRESS)
-	{
-		posy -= 0.1;
-	}
-	if (key == GLFW_KEY_V && action == GLFW_PRESS)
-	{
-		posz -= 0.1;
-	}
-
-	
-
-
 
 
 	if (key >= 0 && key < 1024)

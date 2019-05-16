@@ -23,6 +23,12 @@ public:
 	void keyControlAerea(bool* keys, GLfloat deltaTime);
 	void mouseControlAerea(GLfloat xChange, GLfloat yChange);
 
+	//Funciones para el control de la camara de noria
+	void keyControlNoria(bool* keys, GLfloat deltaTime);
+	void mouseControlNoria(GLfloat xChange, GLfloat yChange);
+
+
+
 	glm::vec3 getCameraPosition();
 	glm::vec3 getCameraDirection();
 	glm::mat4 calculateViewMatrix();
