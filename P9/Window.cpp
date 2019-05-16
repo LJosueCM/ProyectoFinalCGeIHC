@@ -168,11 +168,18 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 
 	}
 
-	//movimiento kilauea
-	if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+	////movimiento kilauea
+	//if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+	//{
+	//	if (kilauea == 1) { kilauea = 0; }
+	//	else { kilauea = 1; }
+	//}
+
+	//movimiento noria
+	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
-		if (kilauea == 1) { kilauea = 0; }
-		else { kilauea = 1; }
+		if (noria == 1) { noria = 0; }
+		else { noria = 1; }
 	}
 
 	/******************************Para luces tipo point******************************************************************/

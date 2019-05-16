@@ -3,6 +3,7 @@
 #include<glew.h>
 #include<glfw3.h>
 extern bool kilauea;
+extern bool noria;
 class Window
 {
 public:

@@ -1,15 +1,15 @@
 ﻿  practica10_alumno.cpp
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(12): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(401): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(421): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(504): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1241): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1281): warning C4305: '+=': truncamiento de 'double' a 'float'
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1284): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\window.h(14): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(497): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(516): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(599): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(1430): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(1473): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\l.j.mier\documents\proyecto final\p9\practica10_alumno.cpp(1476): warning C4305: '=': truncamiento de 'double' a 'float'
   Generando código
-  0 of 1087 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  1 of 1074 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
-  P9.vcxproj -> C:\Users\Elda\Desktop\PROYECTO_FINAL_COMPU_GRAFICA\ProyectoFinalCGeIHC\Release\P9.exe
+  P9.vcxproj -> C:\Users\L.J.Mier\Documents\Proyecto Final\Release\P9.exe
