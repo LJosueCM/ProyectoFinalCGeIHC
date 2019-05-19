@@ -223,11 +223,11 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	}
 
 	/********************* TECLAS AUXILIARES ***************************/
-	if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+	if (key == 262 && action == GLFW_PRESS)
 	{
 		posx += 0.1;
 	}
-	if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+	if (key == 263 && action == GLFW_PRESS)
 	{
 		posx -= 0.1;
 	}
@@ -240,18 +240,6 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	if (key == 264 && action == GLFW_PRESS)
 	{
 		posy -= 0.1;
-	}
-	
-	
-	
-	if (key == 262 && action == GLFW_PRESS)
-	{
-		posz += 0.1;
-	}
-
-	if (key == 263 && action == GLFW_PRESS)
-	{
-		posz -= 0.1;
 	}
 
 	/**************************Para el juego*********************************/
