@@ -3,7 +3,7 @@
 extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
 extern GLfloat upX, upY, upZ, posx, posy,posz;
-extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata ,camaraNoria, juego_encendido, disparo;
+extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata ,camaraNoria, juego_encendido, disparo, colision;
 
 Window::Window()
 {
@@ -264,6 +264,7 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	if (key == GLFW_KEY_9 && action == GLFW_PRESS)
 	{
 		juego_encendido = 0;
+		colision = 0;
 	}
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	{
