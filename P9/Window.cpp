@@ -3,7 +3,7 @@
 extern GLfloat posX, posY, posZ;
 extern GLfloat frontX, frontY, frontZ;
 extern GLfloat upX, upY, upZ, posx, posy,posz;
-extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata ,camaraNoria;
+extern GLint camara1, camara2, apagarS1, apagarS2, apagarP1, apagarP2, globo, lata ,camaraNoria, juego_encendido, disparo;
 
 Window::Window()
 {
@@ -116,18 +116,10 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 
 
-		printf("PosX: %f\n", posX);
-		printf("PosY: %f\n", posY);
-		printf("PosZ: %f\n", posZ);
-		printf("frontX: %f\n", frontX);
-		printf("frontY: %f\n", frontY);
-		printf("frontZ: %f\n", frontZ);
-		printf("UpX: %f\n", upX);
-		printf("UpY: %f\n", upY);
-		printf("UpZ: %f\n", upZ);
-		printf("lataX: %f\n", posx);
-		printf("latay: %f\n", posy);
-		printf("lataz: %f\n", posz);
+
+		printf("globox: %f\n", posx);
+		printf("globoy: %f\n", posy);
+		printf("globoz: %f\n", posz);
 
 
 	}
@@ -191,13 +183,6 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 
 	}
 
-	////movimiento kilauea
-	//if (key == GLFW_KEY_1 && action == GLFW_PRESS)
-	//{
-	//	if (kilauea == 1) { kilauea = 0; }
-	//	else { kilauea = 1; }
-	//}
-
 	//movimiento noria
 	if (key == GLFW_KEY_G && action == GLFW_PRESS)
 	{
@@ -236,6 +221,59 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		lata = 1;
 	}
+
+	/********************* TECLAS AUXILIARES ***************************/
+	if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+	{
+		posx += 0.1;
+	}
+	if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+	{
+		posx -= 0.1;
+	}
+	
+	
+	if (key == 265 && action == GLFW_PRESS)
+	{
+		posy += 0.1;
+	}
+	if (key == 264 && action == GLFW_PRESS)
+	{
+		posy -= 0.1;
+	}
+	
+	
+	
+	if (key == 262 && action == GLFW_PRESS)
+	{
+		posz += 0.1;
+	}
+
+	if (key == 263 && action == GLFW_PRESS)
+	{
+		posz -= 0.1;
+	}
+
+	/**************************Para el juego*********************************/
+
+
+	if (key == GLFW_KEY_0 && action == GLFW_PRESS)
+	{
+		juego_encendido = 1;
+	}
+	if (key == GLFW_KEY_9 && action == GLFW_PRESS)
+	{
+		juego_encendido = 0;
+	}
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		disparo = 1;
+	}
+
+
+
+
+
 
 
 	if (key >= 0 && key < 1024)

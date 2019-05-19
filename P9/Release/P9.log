@@ -1,102 +1,21 @@
-﻿  Camera.cpp
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(105): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(120): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(125): warning C4244: '+=': conversión de 'double' a 'T'; posible pérdida de datos
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(137): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(138): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(139): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(141): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(142): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(143): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(168): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(169): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(170): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(184): warning C4244: '-=': conversión de 'double' a 'T'; posible pérdida de datos
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(189): warning C4244: '+=': conversión de 'double' a 'T'; posible pérdida de datos
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(201): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(202): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(203): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(205): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
-c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\camera.cpp(207): warning C4305: '=': truncamiento de 'double' a 'T'
-          with
-          [
-              T=float
-          ]
+﻿  practica10_alumno.cpp
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(13): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\window.h(14): warning C4244: 'return': conversión de 'GLint' a 'GLfloat'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(102): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(513): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(532): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(617): warning C4305: 'argumento': truncamiento de 'double' a 'GLfloat'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1448): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1516): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1519): warning C4305: '=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1573): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1585): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1595): warning C4305: '+=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1602): warning C4305: '-=': truncamiento de 'double' a 'float'
+c:\users\elda\desktop\proyecto_final_compu_grafica\proyectofinalcgeihc\p9\practica10_alumno.cpp(1611): warning C4305: '+=': truncamiento de 'double' a 'float'
   Generando código
-  1 of 1078 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1082 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Generación de código finalizada
   P9.vcxproj -> C:\Users\Elda\Desktop\PROYECTO_FINAL_COMPU_GRAFICA\ProyectoFinalCGeIHC\Release\P9.exe

@@ -29,6 +29,7 @@
 #include <irrKlang.h>
 
 
+
 using namespace irrklang;
 const float toRadians = 3.14159265f / 180.0f;
 float movOffset;
@@ -85,6 +86,8 @@ Model Mesa;
 Model Park;
 Model Ice_Cream;
 Model PopCorn;
+Model Stand;
+Model Dardo;
 
 Skybox skybox;
 Skybox skybox2;
@@ -93,10 +96,10 @@ Skybox skybox3;
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 
-int cont = 0;
-float hora = 0.0;
-int camara1 = 1, camara2 = 0, camaraNoria = 0;
-float mov_x_pato = 0, mov_y_pato = 0;
+int cont = 0, disparo = 0;
+float hora = 0.0, mov_z_dardo = 0.0, aux = 0.0;
+int camara1 = 1, camara2 = 0, camaraNoria = 0, juego_encendido = 0, bandera = 1, globo_arriba = 0;
+float mov_x_globo = 0, mov_y_globo = -0.01;
 int apagarS1 = 0, apagarS2 = 0, apagarP1 = 0, apagarP2 = 0, luces_entrada = 0, globo = 0, trigger_globo = 0, lata = 0, contador_lata = 0, trigger_coca = 0;
 float distancia_luz1 = -8.0f, distancia_luz2 = -1.5f,  distanca_Luz1P = 9.5f, distancia_Luz2P = -1.5f,aumenta_globo = 0, mover_lata_x = 0, posx = 0, posy = 0, posz = 0;
 
@@ -436,6 +439,16 @@ int main()
 	//Palomitas chidas
 	PopCorn = Model();
 	PopCorn.LoadModel("Models/Puesto_palomitas.obj");
+	
+
+	//Stand
+	Stand = Model();
+	Stand.LoadModel("Models/stand.obj");
+
+	//Dardo
+	Dardo = Model();
+	Dardo.LoadModel("Models/dart.obj");
+
 
 	//luz direccional, sólo 1 y siempre debe de existir
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
@@ -522,7 +535,7 @@ int main()
 			}
 		}
 
-		//Camara libre :v
+		//Camaras
 		if (camara1 == 1 && camara2 ==0)
 		{
 			camera.keyControl(mainWindow.getsKeys(), deltaTime);
@@ -1534,38 +1547,81 @@ int main()
 			Can.RenderModel();
 		}
 		
-
-
-		/*******************************Para los triggers de teoria************
+		/****************** Juego de destreza ****************************************/
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(9.0f, -2.0f, -10.0f));
-		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 0.4f));
+		model = glm::translate(model, glm::vec3(7.2f, -2.1, -33.0f ));
+		model = glm::scale(model, glm::vec3(1.2f, 0.95f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Mesa.RenderModel();
-
-		/*****************Parte del trigger en pato*********/
-
-		/*v_x_pato += 0.001;
-		mov_y_pato += 0.001;
+		Stand.RenderModel();
 
 		model = glm::mat4(1.0);
-		model = glm::translate(model, glm::vec3(9.0f + mov_x_pato, -1.0f + mov_y_pato, -10.0f));
-		model = glm::rotate(model, 90  * toRadians, glm::vec3(0.0f, 1.0f, 0.0f));
-		model = glm::scale(model, glm::vec3(0.05f, 0.05f, 0.05f));
+		model = glm::translate(model, glm::vec3(8.0f, 0.0, -31.5f - mov_z_dardo));
+		model = glm::rotate(model, 180 * toRadians, glm::vec3(1.0f, 0.0f, 0.0f));
+		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
-		Duck.RenderModel();
+		if (juego_encendido == 1)
+		{
+			Dardo.RenderModel();
+		}
+	
 
-		printf("Movimiento pato: %f", mov_x_pato);
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(5.9f + mov_x_globo, -1.4f + mov_y_globo, -33.0f ));
+		aux = 5.9 + mov_x_globo;
+		model = glm::scale(model, glm::vec3(8.0f, 7.0f, 8.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		Material_brillante.UseMaterial(uniformSpecularIntensity, uniformShininess);
+		if (juego_encendido == 1 )
+		{
+			Globo_B.RenderModel();
+		}
 
-		if (mov_y_pato == 1.0f){
-			printf("Soy igual a 1");
-			
+		//Movimiento horizontal 
+		if (juego_encendido == 1)
+		{
+			mov_x_globo += 0.01;
+			if (mov_x_globo > 2.6) {
+				mov_x_globo -= mov_x_globo;
+			}
 
-		}*/
+		}
+		//Movimiento vertical 
+		if (juego_encendido == 1)
+		{
+			if (globo_arriba == 0) { //Si es cero es porque esta abajo y debe aumentar
+				mov_y_globo += 0.01;
+				if ( mov_y_globo >= 1.4) {
+					globo_arriba = 1; //quiere decir que el globo ya esta arriba y debe bajar 
+				}
+			}
+			if (globo_arriba == 1) //Maxima altura, globo debe bajar 
+			{
+				mov_y_globo -= 0.01;
+				if (mov_y_globo <= 0.0) {
+					globo_arriba = 0;
+				}
+			}
 
+		}
+		
+		if (disparo == 1) {
+				mov_z_dardo += 0.03;
+		
+			if (mov_z_dardo >= 1.5) {
+				disparo = 0;
+				mov_z_dardo = -1.5;
+				juego_encendido = 0;
+			}
+		}
+
+		//
+		
+		
+
+		
 
 		mainWindow.swapBuffers();
 	}
